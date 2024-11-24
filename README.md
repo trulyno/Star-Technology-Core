@@ -1,10 +1,3 @@
-# GregTech Addon Template
- Template for GregTech Modern addons on 1.20.1
+# Star Technology Core 
 
- Original template by screret, updated by JuiceyBeans
-
-Repositories you can use for additional reference:
-
-- [Juiceycality](https://github.com/JuiceyBeans/Juiceycality)
-- [CosmicCore](https://github.com/Frontiers-PackForge/CosmicCore)
-- [Gregicality Rocketry](https://github.com/Argent-Matter/gcyr/)
+This repository contains the Core Mod for Star Technology, adding new unique things to Gregtech Modern for the modpack.

@@ -1,4 +1,4 @@
-package com.example.examplemod;
+package com.startechnology.start_core;
 
 import com.gregtechceu.gtceu.api.GTCEuAPI;
 import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialEvent;
@@ -7,9 +7,7 @@ import com.gregtechceu.gtceu.api.data.chemical.material.event.PostMaterialEvent;
 import com.gregtechceu.gtceu.api.machine.MachineDefinition;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
-import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Items;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -19,13 +17,13 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod(ExampleMod.MOD_ID)
-public class ExampleMod {
-    public static final String MOD_ID = "examplemod";
+@Mod(StarTCore.MOD_ID)
+public class StarTCore {
+    public static final String MOD_ID = "start_core";
     public static final Logger LOGGER = LogManager.getLogger();
-    public static GTRegistrate EXAMPLE_REGISTRATE = GTRegistrate.create(ExampleMod.MOD_ID);
+    public static GTRegistrate START_REGISTRATE = GTRegistrate.create(StarTCore.MOD_ID);
 
-    public ExampleMod() {
+    public StarTCore() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         modEventBus.addListener(this::commonSetup);
@@ -43,20 +41,15 @@ public class ExampleMod {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        event.enqueueWork(() -> {
-            LOGGER.info("Hello from common setup! This is *after* registries are done, so we can do this:");
-            LOGGER.info("Look, I found a {}!", Items.DIAMOND);
-        });
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
-        LOGGER.info("Hey, we're on Minecraft version {}!", Minecraft.getInstance().getLaunchedVersion());
     }
 
     // You MUST have this for custom materials.
     // Remember to register them not to GT's namespace, but your own.
     private void addMaterialRegistries(MaterialRegistryEvent event) {
-        GTCEuAPI.materialManager.createRegistry(ExampleMod.MOD_ID);
+        GTCEuAPI.materialManager.createRegistry(StarTCore.MOD_ID);
     }
 
     // As well as this.
