@@ -7,7 +7,8 @@ import com.gregtechceu.gtceu.api.data.chemical.material.event.PostMaterialEvent;
 import com.gregtechceu.gtceu.api.machine.MachineDefinition;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
-import com.startechnology.start_core.machine.hpca.StarTHPCAParts;
+import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
+import com.startechnology.start_core.machine.StarTMachines;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
@@ -70,10 +71,11 @@ public class StarTCore {
     }
 
     private void registerRecipeTypes(GTCEuAPI.RegisterEvent<ResourceLocation, GTRecipeType> event) {
-        //CustomRecipeTypes.init();
+        // Modify Electric blast furnace to have two outputs
+        GTRecipeTypes.BLAST_RECIPES.setMaxIOSize(3, 3, 3, 3);
     }
 
     private void registerMachines(GTCEuAPI.RegisterEvent<ResourceLocation, MachineDefinition> event) {
-        StarTHPCAParts.init();
+        StarTMachines.init();
     }
 }
