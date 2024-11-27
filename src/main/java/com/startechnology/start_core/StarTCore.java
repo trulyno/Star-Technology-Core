@@ -7,6 +7,8 @@ import com.gregtechceu.gtceu.api.data.chemical.material.event.PostMaterialEvent;
 import com.gregtechceu.gtceu.api.machine.MachineDefinition;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
+import com.startechnology.start_core.machine.hpca.StarTHPCAParts;
+
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -21,7 +23,11 @@ import org.apache.logging.log4j.Logger;
 public class StarTCore {
     public static final String MOD_ID = "start_core";
     public static final Logger LOGGER = LogManager.getLogger();
-    public static GTRegistrate START_REGISTRATE = GTRegistrate.create(StarTCore.MOD_ID);
+    public static final GTRegistrate START_REGISTRATE = GTRegistrate.create(StarTCore.MOD_ID);
+
+    public static ResourceLocation resourceLocation(String path) {
+        return new ResourceLocation(StarTCore.MOD_ID, path);
+    }
 
     public StarTCore() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -33,6 +39,7 @@ public class StarTCore {
         modEventBus.addListener(this::modifyMaterials);
         modEventBus.addGenericListener(GTRecipeType.class, this::registerRecipeTypes);
         modEventBus.addGenericListener(MachineDefinition.class, this::registerMachines);
+        START_REGISTRATE.registerRegistrate();
 
         // Most other events are fired on Forge's bus.
         // If we want to use annotations to register event listeners,
@@ -67,6 +74,6 @@ public class StarTCore {
     }
 
     private void registerMachines(GTCEuAPI.RegisterEvent<ResourceLocation, MachineDefinition> event) {
-        //CustomMachines.init();
+        StarTHPCAParts.init();
     }
 }

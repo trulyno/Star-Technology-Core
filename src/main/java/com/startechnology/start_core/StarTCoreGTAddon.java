@@ -18,7 +18,7 @@ public class StarTCoreGTAddon implements IGTAddon {
 
     @Override
     public void initializeAddon() {
-
+        
     }
 
     @Override
