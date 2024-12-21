@@ -1,4 +1,4 @@
-package com.startechnology.start_core.recipes.endgame;
+package com.startechnology.start_core.recipes.categories;
 
 import java.util.function.Consumer;
 
@@ -11,7 +11,7 @@ import com.startechnology.start_core.recipes.StarTRecipe;
 
 import net.minecraft.data.recipes.FinishedRecipe;
 
-public class AkreyriumLine implements StarTRecipe{
+public class AkreyriumLine implements StarTRecipe {
 
     @Override
     public void initRecipes(Consumer<FinishedRecipe> provider) {

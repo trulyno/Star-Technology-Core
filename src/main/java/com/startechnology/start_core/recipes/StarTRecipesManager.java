@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-import com.startechnology.start_core.recipes.endgame.AkreyriumLine;
+import com.startechnology.start_core.recipes.categories.AkreyriumLine;
+import com.startechnology.start_core.recipes.categories.ResetNBT;
 
 import net.minecraft.data.recipes.FinishedRecipe;
 
@@ -13,6 +14,7 @@ public class StarTRecipesManager {
 
     static {
         RECIPES.add(new AkreyriumLine());
+        RECIPES.add(new ResetNBT());
     }
 
     // Initialise all recipes put in to RECIPES_INITIALISED.
