@@ -1,7 +1,6 @@
 package com.startechnology.start_core.api.client;
 
 import java.util.List;
-import java.util.regex.Pattern;
 
 import com.startechnology.start_core.StarTCore;
 
