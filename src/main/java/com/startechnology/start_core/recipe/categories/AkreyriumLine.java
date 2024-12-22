@@ -1,4 +1,4 @@
-package com.startechnology.start_core.recipes.categories;
+package com.startechnology.start_core.recipe.categories;
 
 import java.util.function.Consumer;
 
@@ -7,18 +7,16 @@ import com.gregtechceu.gtceu.api.data.chemical.material.Material;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.gregtechceu.gtceu.api.recipe.chance.logic.ChanceLogic;
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
-import com.startechnology.start_core.recipes.StarTRecipe;
 
 import net.minecraft.data.recipes.FinishedRecipe;
 
-public class AkreyriumLine implements StarTRecipe {
+public class AkreyriumLine {
 
-    @Override
-    public void initRecipes(Consumer<FinishedRecipe> provider) {
+    public static void init(Consumer<FinishedRecipe> provider) {
         leptonicManifoldQuantiserRecipes(provider);
     }
 
-    public void leptonicManifoldQuantiserRecipes(Consumer<FinishedRecipe> provider) {
+    public static void leptonicManifoldQuantiserRecipes(Consumer<FinishedRecipe> provider) {
         GTRecipeType LEPTONIC_MANIFOLD_QUANTISER_TYPE = GTRecipeTypes.get("leptonic_manifold_quantiser");
 
         // KubeJS Interop, get materials registered.

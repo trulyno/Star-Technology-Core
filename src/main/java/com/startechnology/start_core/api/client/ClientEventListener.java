@@ -1,6 +1,4 @@
 package com.startechnology.start_core.api.client;
-
-import com.gregtechceu.gtceu.client.TooltipsHandler;
 import com.startechnology.start_core.StarTCore;
 
 import net.minecraftforge.api.distmarker.Dist;
