@@ -1,5 +1,11 @@
 {
     "block.start_core.hpca_nanofluidic_heat_sink_component": "HPCA Nanofluidic Heat Sink Component",
     "item.start_core.data_dna_disk.tooltip": "§7Storing Information in Life",
-    "item.start_core.data_dna_disk": "§dData DNA Disk"
+    "item.start_core.data_dna_disk": "§dData DNA Disk",
+
+    "behaviour.start_core.bacteria.no_stats": "§7No Stats, Will be generated when created",
+    "behaviour.start_core.bacteria.stats_header": "§fBacteria Stats:",
+    "behaviour.start_core.bacteria.stat_production": "§7Production: {0}",
+    "behaviour.start_core.bacteria.stat_metabolism": "§7Metabolism: {0}",
+    "behaviour.start_core.bacteria.stat_mutability": "§7Mutability: {0}"
 }
