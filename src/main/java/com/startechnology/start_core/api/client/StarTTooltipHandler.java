@@ -12,12 +12,12 @@ import net.minecraft.world.item.TooltipFlag;
 
 public class StarTTooltipHandler {
 
-     private static final String START_REGEX = "\\w+\\." + Pattern.quote(StarTCore.MOD_ID);
+    private static final String START_REGEX = String.format("^.+\\.%s\\..+", StarTCore.MOD_ID);
 
     public static void appendTooltip(ItemStack stack, TooltipFlag flag, List<Component> tooltips) {
         // Item custom tooltips
         String stackDescriptionId = stack.getDescriptionId();
-        
+
         if (stackDescriptionId.matches(START_REGEX)) {
             String stackTooltipLocalKey = stackDescriptionId + ".tooltip";
 
