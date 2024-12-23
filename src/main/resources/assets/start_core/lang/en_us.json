@@ -3,9 +3,17 @@
     "item.start_core.data_dna_disk.tooltip": "§7Storing Information in Life",
     "item.start_core.data_dna_disk": "§dData DNA Disk",
 
+    "item.start_core.bacteria_phenol": "§2Phenol Bacteria Culture",
+    "item.start_core.bacteria_benzene": "§2Benzene Bacteria Culture",
+    "item.start_core.bacteria_toulene": "§2Toulene Bacteria Culture",
+    "item.start_core.bacteria_creosote": "§2Creosote Bacteria Culture",
+
     "behaviour.start_core.bacteria.no_stats": "§7No Stats, Will be generated when created",
     "behaviour.start_core.bacteria.stats_header": "§fBacteria Stats:",
     "behaviour.start_core.bacteria.stat_production": "§7Production: {0}",
     "behaviour.start_core.bacteria.stat_metabolism": "§7Metabolism: {0}",
-    "behaviour.start_core.bacteria.stat_mutability": "§7Mutability: {0}"
-}
+    "behaviour.start_core.bacteria.stat_mutability": "§7Mutability: {0}",
+    "behaviour.start_core.bacteria.stat_affinity": "§dHas affinity with %1$s",
+    "behaviour.start_core.bacteria.possible_affinities": "§dPossible Affinities: %1$s§5, %2$s§5, %3$s",
+    "behaviour.start_core.bacteria.affinity_none": "None"
+}   

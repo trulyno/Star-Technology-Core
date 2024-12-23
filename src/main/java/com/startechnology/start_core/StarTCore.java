@@ -38,8 +38,6 @@ public class StarTCore {
     public StarTCore() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        StarTItems.init();
-
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::clientSetup);
         modEventBus.addListener(this::addMaterialRegistries);
