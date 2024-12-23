@@ -166,6 +166,7 @@ processResources {
             "forge_version": forge_version.split("\\.")[0], // only specify major version of forge
             "minecraft_version": minecraft_version,
             "gtceu_version": gtceu_version,
+            "create_version": create_version
     ]
     inputs.properties(properties)
 
