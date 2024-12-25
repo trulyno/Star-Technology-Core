@@ -23,6 +23,22 @@ public class StarTBacteriaStats {
     private Integer mutability;
     private FluidType affinity;
 
+    public Integer getProduction() {
+        return production;
+    }
+
+    public Integer getMetabolism() {
+        return metabolism;
+    }
+
+    public Integer getMutability() {
+        return mutability;
+    }
+
+    public FluidType getAffinity() {
+        return affinity;
+    }
+
     public String getProductionPretty() {
         return StarTBacteriaStats.getPrettyStatHighBias(production);
     }
@@ -103,7 +119,7 @@ public class StarTBacteriaStats {
         if (affinity != null) {
             bacteriaStatsCompound.putString(
                 BACTERIA_AFFINITY_NBT_TAG, 
-                ForgeRegistries.FLUID_TYPES.get().getKey(affinity).toString()
+                ForgeRegistries.FLUID_TYPES.get().getKey(affinity).getPath().toString()
             );
         }
 

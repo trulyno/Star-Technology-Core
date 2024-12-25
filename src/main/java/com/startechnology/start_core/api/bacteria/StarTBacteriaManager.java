@@ -19,7 +19,7 @@ public class StarTBacteriaManager {
     public static StarTBacteriaStats bacteriaStatsFromTag(ItemStack stack) {
         CompoundTag bacteriaCompound =  stack.getOrCreateTag();
 
-        if (!StarTBacteriaManager.hasBacteriaStats(bacteriaCompound)) {
+        if (!hasBacteriaStats(bacteriaCompound)) {
             return null;
         }
 

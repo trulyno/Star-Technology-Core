@@ -10,9 +10,11 @@ import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
 import com.gregtechceu.gtceu.client.TooltipsHandler;
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
 import com.startechnology.start_core.machine.StarTMachines;
+import com.startechnology.start_core.recipe.StarTRecipeTypes;
 import com.startechnology.start_core.item.*;
 
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.RandomSource;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -30,6 +32,7 @@ public class StarTCore {
     public static final String MOD_ID = "start_core";
     public static final Logger LOGGER = LogManager.getLogger();
     public static final GTRegistrate START_REGISTRATE = GTRegistrate.create(StarTCore.MOD_ID);
+    public static final RandomSource RNG = RandomSource.createThreadSafe();
 
     public static ResourceLocation resourceLocation(String path) {
         return new ResourceLocation(StarTCore.MOD_ID, path);
@@ -79,6 +82,7 @@ public class StarTCore {
     private void registerRecipeTypes(GTCEuAPI.RegisterEvent<ResourceLocation, GTRecipeType> event) {
         // Modify Electric blast furnace to have two outputs
         GTRecipeTypes.BLAST_RECIPES.setMaxIOSize(3, 3, 3, 3);
+        StarTRecipeTypes.init();
     }
 
     private void registerMachines(GTCEuAPI.RegisterEvent<ResourceLocation, MachineDefinition> event) {

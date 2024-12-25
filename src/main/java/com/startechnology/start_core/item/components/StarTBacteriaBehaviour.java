@@ -7,22 +7,57 @@ import java.util.stream.Collectors;
 import org.jetbrains.annotations.Nullable;
 
 import com.gregtechceu.gtceu.api.data.chemical.material.Material;
-import com.gregtechceu.gtceu.api.item.component.IAddInformation;
+import com.gregtechceu.gtceu.api.item.ComponentItem;
+import com.gregtechceu.gtceu.api.item.component.IItemComponent;
 import com.startechnology.start_core.api.bacteria.StarTBacteriaManager;
 import com.startechnology.start_core.api.bacteria.StarTBacteriaStats;
-
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-public class StarTBacteriaBehaviour implements IAddInformation {
+import net.minecraftforge.fluids.FluidType;
+
+public class StarTBacteriaBehaviour extends StarTNBTTooltipsBehaviour {
 
     private List<Material> possibleBacteriaAffinities;
+    private Material mainBacteriaOutput;
 
-    public StarTBacteriaBehaviour(Material... materials) {
+    public List<Material> getPossibleBacteriaAffinities() {
+        return possibleBacteriaAffinities;
+    }
+
+    public List<FluidType> getBehaviourAffinityFluidTypes() {
+        return possibleBacteriaAffinities
+            .stream()
+            .filter(Material::hasFluid)
+            .map(material -> material.getFluid().getFluidType())
+            .collect(Collectors.toList());
+    }
+
+    public FluidType getBehaviourMainFluid() {
+        if (!mainBacteriaOutput.hasFluid()) return null;
+        return mainBacteriaOutput.getFluid().getFluidType();
+    }
+
+    public StarTBacteriaBehaviour(Material mainMaterial, Material... materials) {
         this.possibleBacteriaAffinities = Arrays.asList(materials);
+    }
+
+    public static StarTBacteriaBehaviour getBacteriaBehaviour(ItemStack bacteria) {
+        Item bacteriaItem = bacteria.getItem();
+
+        if (!(bacteriaItem instanceof ComponentItem)) return null;
+
+        List<IItemComponent> components = ((ComponentItem) bacteriaItem).getComponents();
+        
+        return components.stream()
+            .filter(StarTBacteriaBehaviour.class::isInstance)
+            .map(StarTBacteriaBehaviour.class::cast)
+            .findFirst()
+            .orElse(null);
     }
 
     public MutableComponent prettyPossibleBacteriaAffinities() {
@@ -41,7 +76,7 @@ public class StarTBacteriaBehaviour implements IAddInformation {
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComponents,
             TooltipFlag isAdvanced) {
         StarTBacteriaStats stats = StarTBacteriaManager.bacteriaStatsFromTag(stack);
-
+            
         if (stats == null) {
             tooltipComponents.add(Component.translatable("behaviour.start_core.bacteria.no_stats"));
             tooltipComponents.add(Component.literal(""));
@@ -54,6 +89,7 @@ public class StarTBacteriaBehaviour implements IAddInformation {
             tooltipComponents.add(Component.literal(""));
             tooltipComponents.add(Component.translatable("behaviour.start_core.bacteria.stat_affinity", stats.getAffinityPretty().withStyle(ChatFormatting.DARK_PURPLE)));
         }
+
+        super.appendHoverText(stack, level, tooltipComponents, isAdvanced);
     }
-    
 }
