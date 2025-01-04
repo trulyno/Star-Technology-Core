@@ -13,7 +13,7 @@ import net.minecraft.data.recipes.FinishedRecipe;
 public class AkreyriumLine {
 
     public static void init(Consumer<FinishedRecipe> provider) {
-        //leptonicManifoldQuantiserRecipes(provider);
+        leptonicManifoldQuantiserRecipes(provider);
     }
 
     public static void leptonicManifoldQuantiserRecipes(Consumer<FinishedRecipe> provider) {
