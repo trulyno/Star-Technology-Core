@@ -21,7 +21,7 @@ import com.startechnology.start_core.recipe.StarTRecipeTypes;
 import static com.startechnology.start_core.item.StarTBacteriaItems.BACTERIA_ITEMS;
 
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.fluids.FluidType;
+import net.minecraft.world.level.material.Fluid;
 
 public class BacteriaVatLogic implements ICustomRecipeLogic {
     public static void bacterialBreeding() {
@@ -110,7 +110,7 @@ public class BacteriaVatLogic implements ICustomRecipeLogic {
                 WeightedRandomList<Integer> productionOutputs = getStatWeightedList(stats.getProduction(), weights);
                 WeightedRandomList<Integer> metabolismOutputs = getStatWeightedList(stats.getMetabolism(), weights);
                 WeightedRandomList<Integer> mutabilityOutputs = getStatWeightedList(stats.getMutability(), weights);
-                FluidType affinity = stats.getAffinity();
+                Fluid affinity = stats.getAffinity();
 
                 StarTBacteriaStats newStats = new StarTBacteriaStats(
                     productionOutputs.getRandom(),
@@ -125,8 +125,10 @@ public class BacteriaVatLogic implements ICustomRecipeLogic {
                     .inputItems(itemInSlot.copyWithCount(1))
                     .outputItems(outputReplicatedBacteria)
                     .outputItems(outputMutatedBacteria)
+                    .inputFluids(GTMaterials.Water.getFluid(8000))
+                    .inputFluids(GTMaterials.Bacteria.getFluid(2000))
                     .duration(1200)
-                    .EUt(GTValues.V[GTValues.ZPM])
+                    .EUt(2097152)
                     .buildRawRecipe();
             }
         }

@@ -7,7 +7,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.fluids.FluidType;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.registries.ForgeRegistries;
 
 
@@ -21,7 +21,7 @@ public class StarTBacteriaStats {
     private Integer production;
     private Integer metabolism;
     private Integer mutability;
-    private FluidType affinity;
+    private Fluid affinity;
 
     public Integer getProduction() {
         return production;
@@ -35,7 +35,7 @@ public class StarTBacteriaStats {
         return mutability;
     }
 
-    public FluidType getAffinity() {
+    public Fluid getAffinity() {
         return affinity;
     }
 
@@ -51,7 +51,7 @@ public class StarTBacteriaStats {
         if (affinity == null) {
             return Component.translatable("behaviour.start_core.bacteria.affinity_none");
         }
-        return Component.translatable(affinity.getDescriptionId());
+        return Component.translatable(affinity.getFluidType().getDescriptionId());
     }
 
     public String getMutabilityPretty() {
@@ -89,7 +89,7 @@ public class StarTBacteriaStats {
         return StringUtils.repeat('■', stat) + StringUtils.repeat('□', MAX_STAT_VALUE - stat);
     }
 
-    public StarTBacteriaStats(Integer production, Integer metabolism, Integer mutability, FluidType affinity) {
+    public StarTBacteriaStats(Integer production, Integer metabolism, Integer mutability, Fluid affinity) {
         this.production = production;
         this.metabolism = metabolism;
         this.mutability = mutability;
@@ -104,8 +104,8 @@ public class StarTBacteriaStats {
         String bacteriaFluidAffinityString = bacteriaStatsCompound.getString(BACTERIA_AFFINITY_NBT_TAG);
         ResourceLocation bacteriaAffinityLocation = new ResourceLocation(GTCEu.MOD_ID, bacteriaFluidAffinityString);
         
-        if (ForgeRegistries.FLUID_TYPES.get().containsKey(bacteriaAffinityLocation)) {
-            this.affinity = ForgeRegistries.FLUID_TYPES.get().getValue(bacteriaAffinityLocation);
+        if (ForgeRegistries.FLUIDS.containsKey(bacteriaAffinityLocation)) {
+            this.affinity = ForgeRegistries.FLUIDS.getValue(bacteriaAffinityLocation);
         }
     }
 
@@ -119,7 +119,7 @@ public class StarTBacteriaStats {
         if (affinity != null) {
             bacteriaStatsCompound.putString(
                 BACTERIA_AFFINITY_NBT_TAG, 
-                ForgeRegistries.FLUID_TYPES.get().getKey(affinity).getPath().toString()
+                ForgeRegistries.FLUIDS.getKey(affinity).getPath().toString()
             );
         }
 

@@ -18,7 +18,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.fluids.FluidType;
+import net.minecraft.world.level.material.Fluid;
 
 public class StarTBacteriaBehaviour extends StarTNBTTooltipsBehaviour {
 
@@ -29,20 +29,21 @@ public class StarTBacteriaBehaviour extends StarTNBTTooltipsBehaviour {
         return possibleBacteriaAffinities;
     }
 
-    public List<FluidType> getBehaviourAffinityFluidTypes() {
+    public List<Fluid> getBehaviourAffinityFluids() {
         return possibleBacteriaAffinities
             .stream()
             .filter(Material::hasFluid)
-            .map(material -> material.getFluid().getFluidType())
+            .map(material -> material.getFluid())
             .collect(Collectors.toList());
     }
 
-    public FluidType getBehaviourMainFluid() {
+    public Fluid getBehaviourMainFluid() {
         if (!mainBacteriaOutput.hasFluid()) return null;
-        return mainBacteriaOutput.getFluid().getFluidType();
+        return mainBacteriaOutput.getFluid();
     }
 
     public StarTBacteriaBehaviour(Material mainMaterial, Material... materials) {
+        this.mainBacteriaOutput = mainMaterial;
         this.possibleBacteriaAffinities = Arrays.asList(materials);
     }
 

@@ -18,7 +18,7 @@ public class StarTNBTTooltipsBehaviour implements IAddInformation {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComponents,
             TooltipFlag isAdvanced) {
-        StarTCustomTooltip tooltips = StarTCustomTooltipsManager.customTooltipFromTag(stack);
+        StarTCustomTooltip tooltips = StarTCustomTooltipsManager.customTooltipFromTag(stack.getOrCreateTag());
 
         if (tooltips != null) {
             tooltipComponents.subList(1, tooltipComponents.size()).clear();

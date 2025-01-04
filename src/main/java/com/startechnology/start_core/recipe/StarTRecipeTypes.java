@@ -6,6 +6,8 @@ import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
 import com.lowdragmc.lowdraglib.gui.texture.ProgressTexture;
 import com.startechnology.start_core.recipe.logic.BacteriaVatLogic;
+import com.startechnology.start_core.recipe.logic.BacterialDormantAwakeningLogic;
+import com.startechnology.start_core.recipe.logic.BacterialHydrocarbonHarvesterLogic;
 import com.startechnology.start_core.recipe.logic.BacterialRunicMutatorLogic;
 
 public class StarTRecipeTypes {
@@ -19,13 +21,13 @@ public class StarTRecipeTypes {
         .setMaxIOSize(2, 1, 2, 0)
         .setEUIO(IO.IN)
         .addCustomRecipeLogic(new BacterialRunicMutatorLogic())
+        .addCustomRecipeLogic(new BacterialDormantAwakeningLogic())
         .setProgressBar(GuiTextures.PROGRESS_BAR_BATH, ProgressTexture.FillDirection.LEFT_TO_RIGHT);
 
     public static final GTRecipeType BACTERIAL_HYDROCARBON_HARVESTER_RECIPES = GTRecipeTypes.register("bacterial_hydrocarbon_harvester", GTRecipeTypes.MULTIBLOCK)
-        .setMaxIOSize(1, 0, 4, 2)
+        .setMaxIOSize(2, 0, 2, 4)
         .setEUIO(IO.IN)
-        // TODO: Hydrocarbon Recipe Logic
-        // .addCustomRecipeLogic(new BacterialRunicMutatorLogic())
+        .addCustomRecipeLogic(new BacterialHydrocarbonHarvesterLogic())
         .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressTexture.FillDirection.LEFT_TO_RIGHT);
 
     public static final void init() {

@@ -4,9 +4,13 @@ import com.gregtechceu.gtceu.api.item.ComponentItem;
 import com.gregtechceu.gtceu.api.item.IComponentItem;
 import com.gregtechceu.gtceu.api.item.component.IItemComponent;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
+import com.gregtechceu.gtceu.common.item.TooltipBehavior;
 import com.startechnology.start_core.item.components.StarTBacteriaBehaviour;
+import com.startechnology.start_core.item.components.StarTNBTTooltipsBehaviour;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import com.tterrag.registrate.util.nullness.NonNullConsumer;
+
+import net.minecraft.network.chat.Component;
 
 import static com.startechnology.start_core.StarTCore.START_REGISTRATE;
 
@@ -17,6 +21,15 @@ public class StarTBacteriaItems {
     public static <T extends IComponentItem> NonNullConsumer<T> attach(IItemComponent components) {
         return item -> item.attachComponents(components);
     }
+
+    public static final ItemEntry<ComponentItem> BACTERIA_DORMANT = START_REGISTRATE.item("bacteria_dormant", ComponentItem::create)
+        .lang("Dormant Bacteria Culture")
+        .properties(prop -> prop.stacksTo(16))
+        .onRegister(attach(new StarTNBTTooltipsBehaviour()))
+        .onRegister(attach(new TooltipBehavior(lines -> {
+            lines.add(Component.translatable("item.start_core.bacteria_dormant.tooltip"));
+        })))
+        .register();
 
     public static final ItemEntry<ComponentItem> BACTERIA_METHANE = START_REGISTRATE.item("bacteria_methane", ComponentItem::create)
         .lang("Methane Bacteria Culture")
