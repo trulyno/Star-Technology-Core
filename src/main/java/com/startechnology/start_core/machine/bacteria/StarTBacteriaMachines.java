@@ -18,12 +18,25 @@ import com.startechnology.start_core.recipe.StarTRecipeTypes;
 import static com.startechnology.start_core.StarTCore.START_REGISTRATE;
 
 import dev.latvian.mods.kubejs.KubeJS;
+import net.minecraft.network.chat.Component;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class StarTBacteriaMachines {
         public static final MultiblockMachineDefinition BACTERIAL_BREEDING_VAT = START_REGISTRATE
         .multiblock("bacterial_breeding_vat", BacterialVatMachine::new)
         .langValue("Bacterial Breeding Vat")
+        .tooltips(
+            Component.translatable("block.start_core.bacteria_multiblock_line"),
+            Component.translatable("block.start_core.vat_description"),
+            Component.translatable("block.start_core.breaker_line"),
+            Component.translatable("block.start_core.vat1"),
+            Component.translatable("block.start_core.vat2"),
+            Component.translatable("block.start_core.gap"),
+            Component.translatable("block.start_core.vat3"),
+            Component.translatable("block.start_core.gap"),
+            Component.translatable("block.start_core.vat4"),
+            Component.translatable("block.start_core.breaker_line")
+        )
         .rotationState(RotationState.NON_Y_AXIS)
         .recipeTypes(StarTRecipeTypes.BACTERIAL_BREEDING_VAT_RECIPES)
         .pattern(definition -> 
@@ -56,6 +69,17 @@ public class StarTBacteriaMachines {
     public static final MultiblockMachineDefinition BACTERIAL_RUNIC_MUTATOR = START_REGISTRATE
         .multiblock("bacterial_runic_mutator", BacterialRunicMutator::new)
         .langValue("Bacterial Runic Mutator")
+        .tooltips(
+            Component.translatable("block.start_core.bacteria_multiblock_line"),
+            Component.translatable("block.start_core.runic_mutator_description"),
+            Component.translatable("block.start_core.breaker_line"),
+            Component.translatable("block.start_core.rm0"),
+            Component.translatable("block.start_core.rm1"),
+            Component.translatable("block.start_core.gap"),
+            Component.translatable("block.start_core.rm3"),
+            Component.translatable("block.start_core.rm4"),
+            Component.translatable("block.start_core.breaker_line")
+        )
         .rotationState(RotationState.NON_Y_AXIS)
         .recipeTypes(StarTRecipeTypes.BACTERIAL_RUNIC_MUTATOR_RECIPES)
         .pattern(definition -> FactoryBlockPattern.start()
@@ -93,6 +117,20 @@ public class StarTBacteriaMachines {
     public static final MultiblockMachineDefinition BACTERIAL_HYDROCARBON_HARVESTER = START_REGISTRATE
         .multiblock("bacterial_hydrocarbon_harvester", WorkableElectricMultiblockMachine::new)
         .langValue("Bacterial Hydrocarbon Harvester")
+        .tooltips(
+            Component.translatable("block.start_core.bacteria_multiblock_line"),
+            Component.translatable("block.start_core.harvester_description"),
+            Component.translatable("block.start_core.breaker_line"),
+            Component.translatable("block.start_core.hv0"),
+            Component.translatable("block.start_core.hv1"),
+            Component.translatable("block.start_core.gap"),
+            Component.translatable("block.start_core.hv2"),
+            Component.translatable("block.start_core.gap"),
+            Component.translatable("block.start_core.hv3"),
+            Component.translatable("block.start_core.gap"),
+            Component.translatable("block.start_core.hv4"),
+            Component.translatable("block.start_core.breaker_line")
+        )
         .rotationState(RotationState.NON_Y_AXIS)
         .recipeTypes(StarTRecipeTypes.BACTERIAL_HYDROCARBON_HARVESTER_RECIPES)
         .pattern(definition -> FactoryBlockPattern.start()
