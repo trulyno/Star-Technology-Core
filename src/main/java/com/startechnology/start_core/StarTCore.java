@@ -11,6 +11,7 @@ import com.gregtechceu.gtceu.client.TooltipsHandler;
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
 import com.startechnology.start_core.machine.StarTMachines;
 import com.startechnology.start_core.recipe.StarTRecipeTypes;
+import com.startechnology.start_core.api.StarTCreativeTab;
 import com.startechnology.start_core.item.*;
 
 import net.minecraft.resources.ResourceLocation;
@@ -40,6 +41,9 @@ public class StarTCore {
 
     public StarTCore() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        StarTCreativeTab.init();
+        START_REGISTRATE.creativeModeTab(() -> StarTCreativeTab.START_CORE);
 
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::clientSetup);

@@ -63,7 +63,7 @@ public class StarTBacteriaMachines {
             .build()
         )
         .workableCasingRenderer(KubeJS.id("block/casings/machine_casing_peek"),
-            GTCEu.id("block/multiblock/large_chemical_reactor"), false)
+            GTCEu.id("block/machines/brewery"), false)
         .register();
 
     public static final MultiblockMachineDefinition BACTERIAL_RUNIC_MUTATOR = START_REGISTRATE
@@ -154,7 +154,7 @@ public class StarTBacteriaMachines {
             .build()
         )
         .workableCasingRenderer(KubeJS.id("block/casings/machine_casing_peek"),
-            GTCEu.id("block/multiblock/large_chemical_reactor"), false)
+            GTCEu.id("block/machines/distillery"), false)
         .register();
 
     public static void init() {

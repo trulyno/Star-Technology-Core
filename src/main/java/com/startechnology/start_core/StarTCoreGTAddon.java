@@ -3,6 +3,7 @@ package com.startechnology.start_core;
 import com.gregtechceu.gtceu.api.addon.GTAddon;
 import com.gregtechceu.gtceu.api.addon.IGTAddon;
 import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
+import com.startechnology.start_core.api.StarTCreativeTab;
 import com.startechnology.start_core.item.StarTItems;
 import com.startechnology.start_core.recipe.StarTRecipes;
 

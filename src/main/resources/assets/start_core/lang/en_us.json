@@ -78,6 +78,7 @@
     "block.start_core.vat1": "§6Bacterial Breeding:",
     "block.start_core.vat2": "§7Replicate and mutate bacterial colonies, producing a large amount for usage in Harvesting or Mutation.",
     "block.start_core.vat3": "§7Produces §f16x Replicated§7 bacteria with the exact same type, stats and affinity.",
-    "block.start_core.vat4": "§7Produces §f16x Mutated§7 bacteria with the exact same type and affinity, but mutated stats depending on the §fMutatability §7of the bacteria."
+    "block.start_core.vat4": "§7Produces §f16x Mutated§7 bacteria with the exact same type and affinity, but mutated stats depending on the §fMutatability §7of the bacteria.",
     
+    "tab.start_core.creative": "Star Technology Core"
 }   
