@@ -1,0 +1,34 @@
+package com.startechnology.start_core.machine.fusion;
+
+import com.gregtechceu.gtceu.api.block.IFusionCasingType;
+import com.startechnology.start_core.StarTCore;
+import net.minecraft.resources.ResourceLocation;
+
+public enum StarTFusionCasings implements IFusionCasingType {
+
+    AUXILIARY_BOOSTED_FUSION_CASING_MK1("auxiliary_boosted_fusion_casing_mk1", 3),
+    AUXILIARY_FUSION_COIL_MK1("auxiliary_fusion_coil_mk1", 3);
+
+    private final String name;
+    private final int harvestLevel;
+
+    StarTFusionCasings(String name, int harvestLevel) {
+        this.name = name;
+        this.harvestLevel = harvestLevel;
+    }
+
+    @Override
+    public String getSerializedName() {
+        return this.name;
+    }
+
+    @Override
+    public ResourceLocation getTexture() {
+        return StarTCore.resourceLocation("block/casings/fusion/%s".formatted(this.name));
+    }
+
+    @Override
+    public int getHarvestLevel() {
+        return this.harvestLevel;
+    }
+}

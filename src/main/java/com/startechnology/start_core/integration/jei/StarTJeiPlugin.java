@@ -1,12 +1,15 @@
 package com.startechnology.start_core.integration.jei;
 
+import java.util.Arrays;
+
 import org.jetbrains.annotations.NotNull;
 
+import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
 import com.gregtechceu.gtceu.integration.jei.recipe.GTRecipeJEICategory;
 import com.lowdragmc.lowdraglib.LDLib;
 import com.startechnology.start_core.StarTCore;
-import com.startechnology.start_core.machine.StarTMachines;
 import com.startechnology.start_core.machine.bacteria.StarTBacteriaMachines;
+import com.startechnology.start_core.machine.fusion.StarTFusionMachines;
 import com.startechnology.start_core.recipe.StarTRecipeTypes;
 
 import mezz.jei.api.IModPlugin;
@@ -35,6 +38,13 @@ public class StarTJeiPlugin implements IModPlugin {
 
         registration.addRecipeCatalyst(StarTBacteriaMachines.BACTERIAL_RUNIC_MUTATOR.asStack(), 
             GTRecipeJEICategory.TYPES.apply(StarTRecipeTypes.BACTERIAL_RUNIC_MUTATOR_RECIPES.getCategory())
+        );
+
+        Arrays.asList(StarTFusionMachines.AUXILIARY_BOOSTED_FUSION_REACTOR).forEach(
+            fusion_reactor -> {
+                registration.addRecipeCatalyst(fusion_reactor.asStack(), 
+                GTRecipeJEICategory.TYPES.apply(GTRecipeTypes.FUSION_RECIPES.getCategory()));
+            }
         );
     }
     

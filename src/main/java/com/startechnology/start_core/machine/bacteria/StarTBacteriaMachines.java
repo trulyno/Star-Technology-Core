@@ -12,8 +12,6 @@ import com.gregtechceu.gtceu.api.pattern.FactoryBlockPattern;
 import com.gregtechceu.gtceu.api.pattern.Predicates;
 import com.gregtechceu.gtceu.common.data.GCYMBlocks;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
-import com.startechnology.start_core.machine.custom.BacterialRunicMutator;
-import com.startechnology.start_core.machine.custom.BacterialVatMachine;
 import com.startechnology.start_core.recipe.StarTRecipeTypes;
 import static com.startechnology.start_core.StarTCore.START_REGISTRATE;
 

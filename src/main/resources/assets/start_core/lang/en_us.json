@@ -80,5 +80,16 @@
     "block.start_core.vat3": "§7Produces §f16x Replicated§7 bacteria with the exact same type, stats and affinity.",
     "block.start_core.vat4": "§7Produces §f16x Mutated§7 bacteria with the exact same type and affinity, but mutated stats depending on the §fMutatability §7of the bacteria.",
     
-    "tab.start_core.creative": "Star Technology Core"
+    "tab.start_core.creative": "Star Technology Core",
+
+    "block.start_core.uhv_auxiliary_boosted_fusion_reactor": "Auxiliary Boosted Fusion Reactor MK I",
+    "start_core.machine.auxiliary_boosted_fusion_reactor.description": "§7A high-efficiency fusion reactor that utilises auxiliary fusion coils to enhance fusion reactions, enabling for higher density of fusion reactions taking place within the chamber at once",
+    "start_core.machine.auxiliary_boosted_fusion_reactor.line": "§c§lParallel Fusion",
+    "start_core.machine.auxiliary_boosted_fusion_reactor.fusion_info": "§6Fusion Information:",
+    "start_core.machine.auxiliary_boosted_fusion_reactor.specific": "§7The reactor only takes {0} energy hatches, Each hatch increases the buffer of the reactor by {1}M EU",
+    "block.start_core.auxiliary_boosted_fusion_casing_mk1": "Auxiliary Boosted Fusion Casing MK I",
+    "start_core.machine.fusion_reactor.overclocking": "§7Overclocks double energy and halve duration.",
+    "start_core.machine.auxiliary_boosted_fusion_reactor.parallel_info": "§6Auxiliary Parallelisation:", 
+    "start_core.machine.auxiliary_boosted_fusion_reactor.parallel_info_1": "§7Parallel hatches can be used, A maximum of §b{0} §7parallels will be ran at once.",
+    "block.start_core.auxiliary_fusion_coil_mk1": "Auxiliary Fusion Coil MK I"
 }   

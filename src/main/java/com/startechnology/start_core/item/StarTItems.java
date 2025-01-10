@@ -1,17 +1,16 @@
 package com.startechnology.start_core.item;
 
+import static com.startechnology.start_core.StarTCore.START_REGISTRATE;
+
 import com.gregtechceu.gtceu.api.item.ComponentItem;
 import com.gregtechceu.gtceu.api.item.IComponentItem;
 import com.gregtechceu.gtceu.api.item.component.IItemComponent;
 import com.gregtechceu.gtceu.common.item.DataItemBehavior;
 import com.gregtechceu.gtceu.common.item.TooltipBehavior;
-import com.startechnology.start_core.api.StarTCreativeTab;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import com.tterrag.registrate.util.nullness.NonNullConsumer;
 
 import net.minecraft.network.chat.Component;
-
-import static com.startechnology.start_core.StarTCore.START_REGISTRATE;
 
 public class StarTItems {
     public static <T extends IComponentItem> NonNullConsumer<T> attach(IItemComponent components) {
