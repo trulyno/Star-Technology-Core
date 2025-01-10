@@ -26,6 +26,6 @@ public class StarTItems {
         .register();
 
     public static void init() {
-        //StarTBacteriaItems.init();
+        StarTBacteriaItems.init();
     }
 }

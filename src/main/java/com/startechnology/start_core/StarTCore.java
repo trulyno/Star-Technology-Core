@@ -84,11 +84,10 @@ public class StarTCore {
     private void registerRecipeTypes(GTCEuAPI.RegisterEvent<ResourceLocation, GTRecipeType> event) {
         // Modify Electric blast furnace to have two outputs
         GTRecipeTypes.BLAST_RECIPES.setMaxIOSize(3, 3, 3, 3);
-        //StarTRecipeTypes.init();
+        StarTRecipeTypes.init();
     }
 
     private void registerMachines(GTCEuAPI.RegisterEvent<ResourceLocation, MachineDefinition> event) {
-        //StarTMachines.init();
-        StarTFusionMachines.init();
+        StarTMachines.init();
     }
 }
