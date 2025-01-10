@@ -1,15 +1,15 @@
 package com.startechnology.start_core;
 
+import java.util.function.Consumer;
+
 import com.gregtechceu.gtceu.api.addon.GTAddon;
 import com.gregtechceu.gtceu.api.addon.IGTAddon;
 import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
-import com.startechnology.start_core.api.StarTCreativeTab;
+import com.startechnology.start_core.block.StarTBlocks;
 import com.startechnology.start_core.item.StarTItems;
 import com.startechnology.start_core.recipe.StarTRecipes;
 
 import net.minecraft.data.recipes.FinishedRecipe;
-
-import java.util.function.Consumer;
 
 @GTAddon
 public class StarTCoreGTAddon implements IGTAddon {
@@ -20,6 +20,7 @@ public class StarTCoreGTAddon implements IGTAddon {
 
     @Override
     public void initializeAddon() {
+        StarTBlocks.init();
         StarTItems.init();
         
     }

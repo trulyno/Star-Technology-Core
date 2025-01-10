@@ -5,7 +5,6 @@ import org.jetbrains.annotations.NotNull;
 import com.gregtechceu.gtceu.integration.jei.recipe.GTRecipeJEICategory;
 import com.lowdragmc.lowdraglib.LDLib;
 import com.startechnology.start_core.StarTCore;
-import com.startechnology.start_core.machine.StarTMachines;
 import com.startechnology.start_core.machine.bacteria.StarTBacteriaMachines;
 import com.startechnology.start_core.recipe.StarTRecipeTypes;
 

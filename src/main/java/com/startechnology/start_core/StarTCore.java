@@ -1,5 +1,8 @@
 package com.startechnology.start_core;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.gregtechceu.gtceu.api.GTCEuAPI;
 import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialEvent;
 import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialRegistryEvent;
@@ -7,25 +10,20 @@ import com.gregtechceu.gtceu.api.data.chemical.material.event.PostMaterialEvent;
 import com.gregtechceu.gtceu.api.machine.MachineDefinition;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
-import com.gregtechceu.gtceu.client.TooltipsHandler;
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
-import com.startechnology.start_core.machine.StarTMachines;
-import com.startechnology.start_core.recipe.StarTRecipeTypes;
 import com.startechnology.start_core.api.StarTCreativeTab;
-import com.startechnology.start_core.item.*;
+import com.startechnology.start_core.machine.StarTMachines;
+import com.startechnology.start_core.machine.fusion.StarTFusionMachines;
+import com.startechnology.start_core.recipe.StarTRecipeTypes;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 @SuppressWarnings("unused")
 @Mod(StarTCore.MOD_ID)
@@ -86,10 +84,11 @@ public class StarTCore {
     private void registerRecipeTypes(GTCEuAPI.RegisterEvent<ResourceLocation, GTRecipeType> event) {
         // Modify Electric blast furnace to have two outputs
         GTRecipeTypes.BLAST_RECIPES.setMaxIOSize(3, 3, 3, 3);
-        StarTRecipeTypes.init();
+        //StarTRecipeTypes.init();
     }
 
     private void registerMachines(GTCEuAPI.RegisterEvent<ResourceLocation, MachineDefinition> event) {
-        StarTMachines.init();
+        //StarTMachines.init();
+        StarTFusionMachines.init();
     }
 }
