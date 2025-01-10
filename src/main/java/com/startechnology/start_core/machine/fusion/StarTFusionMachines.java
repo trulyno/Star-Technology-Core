@@ -1,5 +1,6 @@
 package com.startechnology.start_core.machine.fusion;
 
+import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.data.RotationState;
 import com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition;
@@ -11,6 +12,12 @@ import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
 import com.gregtechceu.gtceu.common.data.machines.GTMachineUtils;
 import com.gregtechceu.gtceu.common.data.machines.GTMultiMachines;
 import com.gregtechceu.gtceu.common.machine.multiblock.electric.FusionReactorMachine;
+import com.startechnology.start_core.StarTCore;
+import com.startechnology.start_core.api.machine.StarTRecipeModifiers;
+import com.startechnology.start_core.machine.StarTMachineUtils;
+
+import dev.latvian.mods.kubejs.KubeJS;
+
 import com.gregtechceu.gtceu.api.pattern.Predicates;
 
 import net.minecraft.network.chat.Component;
@@ -24,7 +31,7 @@ public class StarTFusionMachines {
         };
     }
 
-    public static final MultiblockMachineDefinition[] AUXILIARY_BOOSTED_FUSION_REACTOR = GTMachineUtils.registerTieredMultis(
+    public static final MultiblockMachineDefinition[] AUXILIARY_BOOSTED_FUSION_REACTOR = StarTMachineUtils.registerTieredMultis(
         "auxiliary_boosted_fusion_reactor", AuxiliaryBoostedFusionReactor::new, 
         (tier, builder) ->
             builder
@@ -32,20 +39,34 @@ public class StarTFusionMachines {
             .langValue("Auxiliary Boosted Fusion Reactor MK %s".formatted(fusionTierString(tier)))
             .recipeType(GTRecipeTypes.FUSION_RECIPES)
             .recipeModifiers(GTRecipeModifiers.DEFAULT_ENVIRONMENT_REQUIREMENT,
+                    StarTRecipeModifiers.limitedParallelHatch(
+                        (tier - 8) * 4
+                    ),
                     AuxiliaryBoostedFusionReactor::recipeModifier)
             .tooltips(
                 Component.translatable("start_core.machine.auxiliary_boosted_fusion_reactor.line"),
+                Component.translatable("start_core.machine.auxiliary_boosted_fusion_reactor.description"),
+                Component.translatable("block.start_core.breaker_line"),
+                Component.translatable("start_core.machine.auxiliary_boosted_fusion_reactor.fusion_info"),
                 Component.translatable("gtceu.machine.fusion_reactor.capacity",
                         AuxiliaryBoostedFusionReactor.calculateEnergyStorageFactor(tier, 16) / 1000000L),
-                Component.translatable("gtceu.machine.fusion_reactor.overclocking")
+                Component.translatable("start_core.machine.fusion_reactor.overclocking"),
+                Component.literal(""),
+                Component.translatable("start_core.machine.auxiliary_boosted_fusion_reactor.specific", 
+                    GTValues.VN[tier], AuxiliaryBoostedFusionReactor.calculateEnergyStorageFactor(tier, 1) / 1000000L
+                ),
+                Component.literal(""),
+                Component.translatable("start_core.machine.auxiliary_boosted_fusion_reactor.parallel_info"),
+                Component.translatable("start_core.machine.auxiliary_boosted_fusion_reactor.parallel_info_1", (tier - 8) * 4),
+                Component.translatable("block.start_core.breaker_line")
             )
             .appearanceBlock(() -> AuxiliaryBoostedFusionReactor.getCasingState(tier))
             .pattern((definition) -> { 
                 var casing = Predicates.blocks(AuxiliaryBoostedFusionReactor.getCasingState(tier));
                 return FactoryBlockPattern.start()
-	                .aisle("A######################", "#######################", "###########B###########", "###########B###########", "###########B###########", "#######################", "#######################") 
+	                .aisle("#######################", "#######################", "###########B###########", "###########B###########", "###########B###########", "#######################", "#######################") 
 	                .aisle("#######################", "###########B###########", "#######################", "#######################", "#######################", "###########B###########", "#######################") 
-                    .aisle("###########B###########", "#######################", "#######################", "#########CDDDC#########", "#######################", "#######################", "###########B###########") 
+                    .aisle("###########B###########", "#######################", "#######################", "#########CD@DC#########", "#######################", "#######################", "###########B###########") 
                     .aisle("###########B###########", "#######################", "###B#####EAAAE#####B###", "###B###DD#####DD###B###", "###B#####EAAAE#####B###", "#######################", "###########B###########") 
                     .aisle("###########B###########", "####B#############B####", "#######AA#####AA#######", "#####DF##CDDDC##FD#####", "#######AA#####AA#######", "####B#############B####", "###########B###########") 
                     .aisle("#####B###########B#####", "###########B###########", "#####AA#########AA#####", "####DGGFD#####DFGGD####", "#####AA#########AA#####", "###########B###########", "#####B###########B#####") 
@@ -65,7 +86,7 @@ public class StarTFusionMachines {
                     .aisle("###########B###########", "#######################", "###B#####EAAAE#####B###", "###B###DD#####DD###B###", "###B#####EAAAE#####B###", "#######################", "###########B###########") 
                     .aisle("###########B###########", "#######################", "#######################", "#########CDSDC#########", "#######################", "#######################", "###########B###########") 
                     .aisle("#######################", "###########B###########", "#######################", "#######################", "#######################", "###########B###########", "#######################") 
-                    .aisle("#######################", "#######################", "###########B###########", "###########B###########", "###########B###########", "#######################", "######################A") 
+                    .aisle("#######################", "#######################", "###########B###########", "###########B###########", "###########B###########", "#######################", "#######################") 
                     .where('S', Predicates.controller(Predicates.blocks(definition.get())))
                     .where("A", casing)
                     .where("#", Predicates.any())
@@ -77,10 +98,13 @@ public class StarTFusionMachines {
                     .where("F", casing.or(
                         Predicates.blocks(PartAbility.INPUT_ENERGY.getBlockRange(tier, GTValues.UHV).toArray(Block[]::new))
                                 .setMinGlobalLimited(1).setPreviewCount(16)))
+                    .where('@', casing.or(Predicates.abilities(PartAbility.PARALLEL_HATCH)))
                     .build();
             })
+            .workableCasingRenderer(AuxiliaryBoostedFusionReactor.getCasingType(tier).getTexture(),
+                GTCEu.id("block/multiblock/fusion_reactor"), false)
             .register(),
         GTValues.UHV);
-        
+
     public static void init() {}
 }
