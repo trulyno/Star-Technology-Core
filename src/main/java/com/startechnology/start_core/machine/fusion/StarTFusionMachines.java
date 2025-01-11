@@ -1,27 +1,28 @@
 package com.startechnology.start_core.machine.fusion;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.data.RotationState;
 import com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition;
 import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility;
 import com.gregtechceu.gtceu.api.pattern.FactoryBlockPattern;
+import com.gregtechceu.gtceu.api.pattern.MultiblockShapeInfo;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
+import com.gregtechceu.gtceu.common.data.GTMachines;
 import com.gregtechceu.gtceu.common.data.GTRecipeModifiers;
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
-import com.gregtechceu.gtceu.common.data.machines.GTMachineUtils;
-import com.gregtechceu.gtceu.common.data.machines.GTMultiMachines;
-import com.gregtechceu.gtceu.common.machine.multiblock.electric.FusionReactorMachine;
-import com.startechnology.start_core.StarTCore;
 import com.startechnology.start_core.api.machine.StarTRecipeModifiers;
 import com.startechnology.start_core.machine.StarTMachineUtils;
 
-import dev.latvian.mods.kubejs.KubeJS;
-
 import com.gregtechceu.gtceu.api.pattern.Predicates;
 
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 
 public class StarTFusionMachines {
     public static String fusionTierString(int tier) {
@@ -40,7 +41,7 @@ public class StarTFusionMachines {
             .recipeType(GTRecipeTypes.FUSION_RECIPES)
             .recipeModifiers(GTRecipeModifiers.DEFAULT_ENVIRONMENT_REQUIREMENT,
                     StarTRecipeModifiers.limitedParallelHatch(
-                        (tier - 8) * 4
+                        AuxiliaryBoostedFusionReactor.getParallelCount(tier)
                     ),
                     AuxiliaryBoostedFusionReactor::recipeModifier)
             .tooltips(
@@ -57,7 +58,7 @@ public class StarTFusionMachines {
                 ),
                 Component.literal(""),
                 Component.translatable("start_core.machine.auxiliary_boosted_fusion_reactor.parallel_info"),
-                Component.translatable("start_core.machine.auxiliary_boosted_fusion_reactor.parallel_info_1", (tier - 8) * 4),
+                Component.translatable("start_core.machine.auxiliary_boosted_fusion_reactor.parallel_info_1", AuxiliaryBoostedFusionReactor.getParallelCount(tier)),
                 Component.translatable("block.start_core.breaker_line")
             )
             .appearanceBlock(() -> AuxiliaryBoostedFusionReactor.getCasingState(tier))
@@ -69,7 +70,7 @@ public class StarTFusionMachines {
                     .aisle("###########B###########", "#######################", "#######################", "#########CDDDC#########", "#######################", "#######################", "###########B###########") 
                     .aisle("###########B###########", "#######################", "###B#####EAAAE#####B###", "###B###DD#####DD###B###", "###B#####EAAAE#####B###", "#######################", "###########B###########") 
                     .aisle("###########B###########", "####B#############B####", "#######AA#####AA#######", "#####DF##CDDDC##FD#####", "#######AA#####AA#######", "####B#############B####", "###########B###########") 
-                    .aisle("#####B###########B#####", "###########B###########", "#####@A#########A@#####", "####DGGFD#####DFGGD####", "#####@A#########A@#####", "###########B###########", "#####B###########B#####") 
+                    .aisle("#####B###########B#####", "###########B###########", "#####AA#########AA#####", "####DGGFD#####DFGGD####", "#####AA#########AA#####", "###########B###########", "#####B###########B#####") 
                     .aisle("######B#########B######", "#######################", "#####A#####B#####A#####", "####FGD####B####DGF####", "#####A#####B#####A#####", "#######################", "######B#########B######") 
                     .aisle("#######################", "#######B#######B#######", "####A#############A####", "###D#F###########F#D###", "####A#############A####", "#######B#######B#######", "#######################") 
                     .aisle("#######################", "#######################", "####A###B#####B###A####", "###D#D##B#####B##D#D###", "####A###B#####B###A####", "#######################", "#######################") 
@@ -81,8 +82,8 @@ public class StarTFusionMachines {
                     .aisle("#######################", "#######################", "####A###B#####B###A####", "###D#D##B#####B##D#D###", "####A###B#####B###A####", "#######################", "#######################") 
                     .aisle("#######################", "#######B#######B#######", "####A#############A####", "###D#F###########F#D###", "####A#############A####", "#######B#######B#######", "#######################") 
                     .aisle("######B#########B######", "#######################", "#####A#####B#####A#####", "####FGD####B####DGF####", "#####A#####B#####A#####", "#######################", "######B#########B######") 
-                    .aisle("#####B###########B#####", "###########B###########", "#####@A#########A@#####", "####DGGFD#####DFGGD####", "#####@A#########A@#####", "###########B###########", "#####B###########B#####") 
-                    .aisle("###########B###########", "####B#############B####", "#######AA#####AA#######", "#####DF##CDDDC##FD#####", "#######AA#####AA#######", "####B#############B####", "###########B###########") 
+                    .aisle("#####B###########B#####", "###########B###########", "#####AA#########AA#####", "####DGGFD#####DFGGD####", "#####AA#########AA#####", "###########B###########", "#####B###########B#####") 
+                    .aisle("###########B###########", "####B#############B####", "#######AA#####AA#######", "#####DF##CD@DC##FD#####", "#######AA#####AA#######", "####B#############B####", "###########B###########") 
                     .aisle("###########B###########", "#######################", "###B#####EAAAE#####B###", "###B###DD#####DD###B###", "###B#####EAAAE#####B###", "#######################", "###########B###########") 
                     .aisle("###########B###########", "#######################", "#######################", "#########CDSDC#########", "#######################", "#######################", "###########B###########") 
                     .aisle("#######################", "###########B###########", "#######################", "#######################", "#######################", "###########B###########", "#######################") 
@@ -98,13 +99,65 @@ public class StarTFusionMachines {
                     .where("F", casing.or(
                         Predicates.blocks(PartAbility.INPUT_ENERGY.getBlockRange(tier, GTValues.UHV).toArray(Block[]::new))
                                 .setMinGlobalLimited(1).setPreviewCount(16)))
-                    .where('@', casing.or(Predicates.abilities(PartAbility.PARALLEL_HATCH)))
+                    .where('@', casing.or(Predicates.blocks(AuxiliaryBoostedFusionReactor.getParallelHatch(tier))))
                     .build();
+            })
+            .shapeInfos((controller) -> {
+                List<MultiblockShapeInfo> shapeInfos = new ArrayList<>();
+
+                MultiblockShapeInfo.ShapeInfoBuilder baseBuilder = MultiblockShapeInfo.builder()
+                    .aisle("#######################", "#######################", "###########B###########", "###########B###########", "###########B###########", "#######################", "#######################") 
+                    .aisle("#######################", "###########B###########", "#######################", "#######################", "#######################", "###########B###########", "#######################") 
+                    .aisle("###########B###########", "#######################", "#######################", "#########NDMDN#########", "#######################", "#######################", "###########B###########") 
+                    .aisle("###########B###########", "#######################", "###B#####XAAAX#####B###", "###B###DD#####DD###B###", "###B#####UAAAU#####B###", "#######################", "###########B###########") 
+                    .aisle("###########B###########", "####B#############B####", "#######AA#####AA#######", "#####Dn##SD@DS##nD#####", "#######AA#####AA#######", "####B#############B####", "###########B###########") 
+                    .aisle("#####B###########B#####", "###########B###########", "#####AA#########AA#####", "####DGGsD#####DsGGD####", "#####AA#########AA#####", "###########B###########", "#####B###########B#####") 
+                    .aisle("######B#########B######", "#######################", "#####A#####B#####A#####", "####wGD####B####DGe####", "#####A#####B#####A#####", "#######################", "######B#########B######") 
+                    .aisle("#######################", "#######B#######B#######", "####A#############A####", "###D#e###########w#D###", "####A#############A####", "#######B#######B#######", "#######################") 
+                    .aisle("#######################", "#######################", "####A###B#####B###A####", "###D#D##B#####B##D#D###", "####A###B#####B###A####", "#######################", "#######################") 
+                    .aisle("#######################", "#######################", "###X###############X###", "##W#E#############W#E##", "###U###############U###", "#######################", "#######################") 
+                    .aisle("#######################", "#######################", "###A###############A###", "##D#D#############D#D##", "###A###############A###", "#######################", "#######################") 
+                    .aisle("##BBB#############BBB##", "#B###B###########B###B#", "B##A##B#########B##A##B", "B#D#D#B#########B#D#D#B", "B##A##B#########B##A##B", "#B###B###########B###B#", "##BBB#############BBB##") 
+                    .aisle("#######################", "#######################", "###A###############A###", "##D#D#############D#D##", "###A###############A###", "#######################", "#######################") 
+                    .aisle("#######################", "#######################", "###X###############X###", "##W#E#############W#E##", "###U###############U###", "#######################", "#######################") 
+                    .aisle("#######################", "#######################", "####A###B#####B###A####", "###D#D##B#####B##D#D###", "####A###B#####B###A####", "#######################", "#######################") 
+                    .aisle("#######################", "#######B#######B#######", "####A#############A####", "###D#e###########w#D###", "####A#############A####", "#######B#######B#######", "#######################") 
+                    .aisle("######B#########B######", "#######################", "#####A#####B#####A#####", "####wGD####B####DGe####", "#####A#####B#####A#####", "#######################", "######B#########B######") 
+                    .aisle("#####B###########B#####", "###########B###########", "#####AA#########AA#####", "####DGGnD#####DnGGD####", "#####AA#########AA#####", "###########B###########", "#####B###########B#####") 
+                    .aisle("###########B###########", "####B#############B####", "#######AA#####AA#######", "#####Ds##NDDDN##sD#####", "#######AA#####AA#######", "####B#############B####", "###########B###########") 
+                    .aisle("###########B###########", "#######################", "###B#####XAAAX#####B###", "###B###DD#####DD###B###", "###B#####UAAAU#####B###", "#######################", "###########B###########") 
+                    .aisle("###########B###########", "#######################", "#######################", "#########SDDDS#########", "#######################", "#######################", "###########B###########") 
+                    .aisle("#######################", "###########B###########", "#######################", "#######################", "#######################", "###########B###########", "#######################") 
+                    .aisle("#######################", "#######################", "###########B###########", "###########B###########", "###########B###########", "#######################", "#######################") 
+                    .where('M', controller, Direction.NORTH)
+                    .where('A', AuxiliaryBoostedFusionReactor.getCasingState(tier))
+                    .where('D', GTBlocks.FUSION_GLASS.get())
+                    .where('#', Blocks.AIR.defaultBlockState())
+                    .where('G', AuxiliaryBoostedFusionReactor.getCoilState(tier))
+                    .where('W', GTMachines.FLUID_EXPORT_HATCH[tier], Direction.WEST)
+                    .where('E', GTMachines.FLUID_EXPORT_HATCH[tier], Direction.EAST)
+                    .where('S', GTMachines.FLUID_EXPORT_HATCH[tier], Direction.SOUTH)
+                    .where('N', GTMachines.FLUID_EXPORT_HATCH[tier], Direction.NORTH)
+                    .where('w', GTMachines.ENERGY_INPUT_HATCH[tier], Direction.WEST)
+                    .where('e', GTMachines.ENERGY_INPUT_HATCH[tier], Direction.EAST)
+                    .where('s', GTMachines.ENERGY_INPUT_HATCH[tier], Direction.SOUTH)
+                    .where('n', GTMachines.ENERGY_INPUT_HATCH[tier], Direction.NORTH)
+                    .where('U', GTMachines.FLUID_IMPORT_HATCH[tier], Direction.UP)
+                    .where('X', GTMachines.FLUID_IMPORT_HATCH[tier], Direction.DOWN)
+                    .where('@', AuxiliaryBoostedFusionReactor.getParallelHatch(tier))
+                    .where('B', AuxiliaryBoostedFusionReactor.getAuxiliaryCoilState(tier));
+
+                shapeInfos.add(baseBuilder.shallowCopy()
+                    .where('A', AuxiliaryBoostedFusionReactor.getCasingState(tier))
+                    .build());
+                shapeInfos.add(baseBuilder.build());
+                return shapeInfos;
             })
             .workableCasingRenderer(AuxiliaryBoostedFusionReactor.getCasingType(tier).getTexture(),
                 GTCEu.id("block/multiblock/fusion_reactor"), false)
             .register(),
         GTValues.UHV);
 
-    public static void init() {}
+    public static void init() {
+    }   
 }

@@ -9,6 +9,7 @@ import com.gregtechceu.gtceu.api.recipe.modifier.ModifierFunction;
 import com.gregtechceu.gtceu.api.recipe.modifier.RecipeModifier;
 import com.gregtechceu.gtceu.common.block.FusionCasingBlock;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
+import com.gregtechceu.gtceu.common.data.machines.GCYMMachines;
 import com.gregtechceu.gtceu.common.machine.multiblock.electric.FusionReactorMachine;
 import com.startechnology.start_core.block.fusion.StarTFusionBlocks;
 
@@ -24,6 +25,20 @@ public class AuxiliaryBoostedFusionReactor extends FusionReactorMachine {
         return switch (tier) {
             case GTValues.UHV -> StarTFusionBlocks.AUXILIARY_BOOSTED_FUSION_CASING_MK1.get();
             default -> FusionReactorMachine.getCasingState(tier);
+        };
+    }
+
+    public static int getParallelCount(int tier) {
+        return switch (tier) {
+            case GTValues.UHV -> 4;
+            default -> 4;
+        };
+    }
+
+    public static Block getParallelHatch(int tier) {
+        return switch (tier) {
+            case GTValues.UHV -> GCYMMachines.PARALLEL_HATCH[GTValues.IV].getBlock();
+            default -> GCYMMachines.PARALLEL_HATCH[GTValues.IV].getBlock();
         };
     }
 
