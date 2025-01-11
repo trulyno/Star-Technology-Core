@@ -2,13 +2,11 @@ package com.startechnology.start_core.block.fusion;
 
 import static com.startechnology.start_core.StarTCore.START_REGISTRATE;
 
-import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.block.ActiveBlock;
 import com.gregtechceu.gtceu.api.block.IFusionCasingType;
 import com.gregtechceu.gtceu.api.item.tool.GTToolType;
 import com.gregtechceu.gtceu.common.block.FusionCasingBlock;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
-import com.gregtechceu.gtceu.common.data.GTModels;
 import com.gregtechceu.gtceu.data.recipe.CustomTags;
 import com.startechnology.start_core.StarTCore;
 import com.startechnology.start_core.machine.fusion.StarTFusionCasings;
