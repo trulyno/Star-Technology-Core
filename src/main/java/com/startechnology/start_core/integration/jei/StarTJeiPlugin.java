@@ -4,9 +4,9 @@ import java.util.Arrays;
 
 import org.jetbrains.annotations.NotNull;
 
+import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
 import com.gregtechceu.gtceu.integration.jei.recipe.GTRecipeJEICategory;
-import com.lowdragmc.lowdraglib.LDLib;
 import com.startechnology.start_core.StarTCore;
 import com.startechnology.start_core.machine.bacteria.StarTBacteriaMachines;
 import com.startechnology.start_core.machine.fusion.StarTFusionMachines;
@@ -27,7 +27,7 @@ public class StarTJeiPlugin implements IModPlugin {
 
     @Override
     public void registerRecipeCatalysts(@NotNull IRecipeCatalystRegistration registration) {
-        if (LDLib.isReiLoaded() || LDLib.isEmiLoaded()) return;
+        if (GTCEu.Mods.isREILoaded() || GTCEu.Mods.isEMILoaded()) return;
         registration.addRecipeCatalyst(StarTBacteriaMachines.BACTERIAL_BREEDING_VAT.asStack(), 
             GTRecipeJEICategory.TYPES.apply(StarTRecipeTypes.BACTERIAL_BREEDING_VAT_RECIPES.getCategory())
         );
