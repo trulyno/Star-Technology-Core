@@ -12,6 +12,7 @@ import com.gregtechceu.gtceu.api.pattern.FactoryBlockPattern;
 import com.gregtechceu.gtceu.api.pattern.Predicates;
 import com.gregtechceu.gtceu.common.data.GCYMBlocks;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
+import com.gregtechceu.gtceu.common.data.GTRecipeModifiers;
 import com.startechnology.start_core.recipe.StarTRecipeTypes;
 import static com.startechnology.start_core.StarTCore.START_REGISTRATE;
 
@@ -36,6 +37,7 @@ public class StarTBacteriaMachines {
             Component.translatable("block.start_core.breaker_line")
         )
         .rotationState(RotationState.NON_Y_AXIS)
+        .recipeModifier(GTRecipeModifiers.PARALLEL_HATCH)
         .recipeTypes(StarTRecipeTypes.BACTERIAL_BREEDING_VAT_RECIPES)
         .pattern(definition -> 
             FactoryBlockPattern.start()
@@ -50,8 +52,10 @@ public class StarTBacteriaMachines {
             .aisle("  FFFFF  ", "    T    ", "    T    ", "  TTTTT  ", "         ", "         ", "         ", "         ","  KKKKK  ")
             .where("C", Predicates.controller(Predicates.blocks(definition.get())))
             .where("K", Predicates.blocks(ForgeRegistries.BLOCKS.getValue(KubeJS.id("peek_casing")))
+                .setMinGlobalLimited(172)
                 .or(Predicates.autoAbilities(definition.getRecipeTypes()))
-                .or(Predicates.abilities(PartAbility.MAINTENANCE).setExactLimit(1)))
+                .or(Predicates.abilities(PartAbility.MAINTENANCE).setExactLimit(1))
+                .or(Predicates.abilities(PartAbility.PARALLEL_HATCH).setMaxGlobalLimited(1)))
             .where("F", Predicates.blocks(GTBlocks.FIREBOX_TUNGSTENSTEEL.get()))
             .where("P", Predicates.blocks(GTBlocks.CASING_POLYTETRAFLUOROETHYLENE_PIPE.get()))     
             .where("M", Predicates.blocks(GCYMBlocks.MOLYBDENUM_DISILICIDE_COIL_BLOCK.get()))
@@ -95,6 +99,7 @@ public class StarTBacteriaMachines {
 
             .where("#", Predicates.controller(Predicates.blocks(definition.get())))
             .where("K", Predicates.blocks(ForgeRegistries.BLOCKS.getValue(KubeJS.id("peek_casing")))
+                .setMinGlobalLimited(96)
                 .or(Predicates.autoAbilities(definition.getRecipeTypes()))
                 .or(Predicates.abilities(PartAbility.MAINTENANCE).setExactLimit(1)))
             .where("A", Predicates.blocks(GCYMBlocks.CASING_ATOMIC.get()))
@@ -130,6 +135,7 @@ public class StarTBacteriaMachines {
             Component.translatable("block.start_core.breaker_line")
         )
         .rotationState(RotationState.NON_Y_AXIS)
+        .recipeModifier(GTRecipeModifiers.PARALLEL_HATCH)
         .recipeTypes(StarTRecipeTypes.BACTERIAL_HYDROCARBON_HARVESTER_RECIPES)
         .pattern(definition -> FactoryBlockPattern.start()
             .aisle("THHHT", "TKKKT", "T   T", "T   T", "T   T", "TKKKT", "TXXXT")
@@ -139,6 +145,7 @@ public class StarTBacteriaMachines {
             .aisle("THHHT", "TKCKT", "T   T", "T   T", "T   T", "TKKKT", "TXXXT")
             .where("C", Predicates.controller(Predicates.blocks(definition.get())))
             .where("K", Predicates.blocks(ForgeRegistries.BLOCKS.getValue(KubeJS.id("peek_casing")))
+                .setMinGlobalLimited(38)
                 .or(Predicates.autoAbilities(definition.getRecipeTypes()))
                 .or(Predicates.abilities(PartAbility.MAINTENANCE).setExactLimit(1))
                 .or(Predicates.abilities(PartAbility.PARALLEL_HATCH).setMaxGlobalLimited(1)))
