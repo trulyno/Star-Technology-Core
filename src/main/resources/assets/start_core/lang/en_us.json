@@ -91,5 +91,17 @@
     "start_core.machine.fusion_reactor.overclocking": "§7Overclocks double energy and halve duration.",
     "start_core.machine.auxiliary_boosted_fusion_reactor.parallel_info": "§6Auxiliary Parallelisation:", 
     "start_core.machine.auxiliary_boosted_fusion_reactor.parallel_info_1": "§7Parallel hatches can be used, A maximum of §b{0} §7parallels will be ran at once.",
-    "block.start_core.auxiliary_fusion_coil_mk1": "Auxiliary Fusion Coil MK I"
+    "block.start_core.auxiliary_fusion_coil_mk1": "Auxiliary Fusion Coil MK I",
+
+    "block.start_core.ev_64a_energy_converter":  "§5EV§r 64§eA§r Energy Converter",
+    "block.start_core.iv_64a_energy_converter":  "§9IV§r 64§eA§r Energy Converter",
+    "block.start_core.luv_64a_energy_converter": "§dLuV§r 64§eA§r Energy Converter",
+    "block.start_core.max_64a_energy_converter": "§c§lMAX§r 64§eA§r Energy Converter",
+    "block.start_core.opv_64a_energy_converter": "§9§lOpV§r 64§eA§r Energy Converter",
+    "block.start_core.uev_64a_energy_converter": "§aUEV§r 64§eA§r Energy Converter",
+    "block.start_core.uhv_64a_energy_converter": "§4UHV§r 64§eA§r Energy Converter",
+    "block.start_core.uiv_64a_energy_converter": "§2UIV§r 64§eA§r Energy Converter",
+    "block.start_core.uv_64a_energy_converter":  "§3UV§r 64§eA§r Energy Converter",
+    "block.start_core.uxv_64a_energy_converter": "§eUXV§r 64§eA§r Energy Converter",
+    "block.start_core.zpm_64a_energy_converter": "§cZPM§r 64§eA§r Energy Converter"
 }   
