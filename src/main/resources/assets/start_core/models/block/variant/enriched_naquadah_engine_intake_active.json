@@ -1,0 +1,6 @@
+{
+  "parent": "gtceu:block/cube/all",
+  "textures": {
+    "all": "start_core:block/casings/naquadah/engine_intake_casing_active"
+  }
+}
