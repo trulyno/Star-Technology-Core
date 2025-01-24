@@ -33,6 +33,6 @@ jobs:
       uses: actions/upload-artifact@v4.4.3
       with:
         # Artifact name
-        name: Star-Technology-Core.jar
+        name: star-technology-core-libs
         # A file, directory or wildcard pattern that describes what to upload
-        path: ./build/libs/Star-Technology-Core-1.0.0.jar
+        path: ./build/libs/
