@@ -79,12 +79,12 @@ public class BacterialHydrocarbonHarvesterLogic implements ICustomRecipeLogic {
 
                 FluidStack mainOutputStack = new FluidStack(
                     bacteriaBehaviour.getBehaviourMainFluid(), 
-                    800 * existingStats.getProduction()
+                    2000 * existingStats.getProduction()
                 );
 
                 FluidStack byproductOutputStack = new FluidStack(
                     existingStats.getAffinity(),
-                    200 * existingStats.getProduction()
+                    320 * existingStats.getProduction()
                 );
 
                 // Output
@@ -137,7 +137,7 @@ public class BacterialHydrocarbonHarvesterLogic implements ICustomRecipeLogic {
                 );
 
                 FluidStack mainOutputStack = new FluidStack(mainOutput, 
-                    800 * StarTBacteriaStats.MAX_STAT_VALUE
+                    2000 * StarTBacteriaStats.MAX_STAT_VALUE
                 );
 
                 StarTCustomTooltipsManager.writeCustomTooltipsToItem(
@@ -150,7 +150,7 @@ public class BacterialHydrocarbonHarvesterLogic implements ICustomRecipeLogic {
                 List<Fluid> byproductOutputs = inputBehaviour.getBehaviourAffinityFluids();
                 List<FluidStack> byproductOutputStacks = byproductOutputs.stream().map(
                     fluid -> {
-                        FluidStack byproductStack = new FluidStack(fluid, 200 * StarTBacteriaStats.MAX_STAT_VALUE);
+                        FluidStack byproductStack = new FluidStack(fluid, 320 * StarTBacteriaStats.MAX_STAT_VALUE);
 
                         StarTCustomTooltipsManager.writeCustomTooltipsToItem(
                             byproductStack.getOrCreateTag(), 
@@ -166,7 +166,7 @@ public class BacterialHydrocarbonHarvesterLogic implements ICustomRecipeLogic {
 
                 GTRecipe harvesterRecipe = StarTRecipeTypes.BACTERIAL_HYDROCARBON_HARVESTER_RECIPES
                     .recipeBuilder(bacteria.getId().getPath().toString() + "_harvest")
-                    .inputItems(bacteriaInput.copy())
+                    .inputItems(bacteriaInput.copyWithCount(1))
                     .inputFluids(GTMaterials.DistilledWater.getFluid(1000))
                     .inputFluids(bacterialInputSludge)
                     .inputItems(sugar)
