@@ -97,7 +97,7 @@ public class BacterialHydrocarbonHarvesterLogic implements ICustomRecipeLogic {
                     .outputFluids(byproductOutputStack)
                     .outputFluids(mainOutputStack)
                     .duration(240)
-                    .EUt(GTValues.V[GTValues.UV])
+                    .EUt(GTValues.V[GTValues.ZPM])
                     .buildRawRecipe();
             }
         }
@@ -173,7 +173,7 @@ public class BacterialHydrocarbonHarvesterLogic implements ICustomRecipeLogic {
                     .outputFluids(mainOutputStack)
                     .outputFluids(byproductOutputStacks.toArray(new FluidStack[byproductOutputStacks.size()]))
                     .duration(240)
-                    .EUt(GTValues.V[GTValues.UV])
+                    .EUt(GTValues.V[GTValues.ZPM])
                     .buildRawRecipe();
             
                 harvesterRecipe.setId(harvesterRecipe.getId().withPrefix("/"));
