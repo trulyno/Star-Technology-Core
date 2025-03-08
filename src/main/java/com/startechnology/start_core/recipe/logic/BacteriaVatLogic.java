@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.capability.recipe.IRecipeCapabilityHolder;
 import com.gregtechceu.gtceu.api.capability.recipe.ItemRecipeCapability;
@@ -49,8 +50,8 @@ public class BacteriaVatLogic implements ICustomRecipeLogic {
                         .inputFluids(GTMaterials.Bacteria.getFluid(2000))
                         .outputItems(bacteriaMutationOutput)
                         .outputItems(bacteriaReplicationOutput)
-                        .duration(1200)
-                        .EUt(2097152)
+                        .duration(800)
+                        .EUt(GTValues.V[GTValues.UV])
                         .buildRawRecipe();
 
                      // for EMI to detect it's a synthetic recipe (not ever in JSON)
@@ -126,8 +127,8 @@ public class BacteriaVatLogic implements ICustomRecipeLogic {
                     .outputItems(outputMutatedBacteria)
                     .inputFluids(GTMaterials.Water.getFluid(8000))
                     .inputFluids(GTMaterials.Bacteria.getFluid(2000))
-                    .duration(1200)
-                    .EUt(2097152)
+                    .duration(800)
+                    .EUt(GTValues.V[GTValues.UV])
                     .buildRawRecipe();
             }
         }

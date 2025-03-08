@@ -120,7 +120,7 @@ public class BacterialRunicMutatorLogic implements ICustomRecipeLogic {
                 ForgeRegistries.ITEMS.getValue(KubeJS.id("runic_pathway_engraved_plating"))
             )) {
                 // Affinity & stat mutation only.
-                ItemStack output = existingBacteria.copy();
+                ItemStack output = existingBacteria.copyWithCount(1);
                 StarTBacteriaManager.writeBacteriaStatsToItem(output.getOrCreateTag(), mutatedStats);
 
                 return StarTRecipeTypes.BACTERIAL_RUNIC_MUTATOR_RECIPES
@@ -200,7 +200,7 @@ public class BacterialRunicMutatorLogic implements ICustomRecipeLogic {
 
                     GTRecipe affinityRecipe = StarTRecipeTypes.BACTERIAL_RUNIC_MUTATOR_RECIPES
                         .recipeBuilder(bacteria.getId().getPath().toString() + "_affinity")
-                        .inputItems(bacteriaInput.copy())
+                        .inputItems(bacteriaInput.copyWithCount(1))
                         .chancedInput(runicPathway, 10_00 ,0)
                         .inputFluids(GTMaterials.DistilledWater.getFluid(8000))
                         .inputFluids(GTMaterials.Mutagen.getFluid( 400))
@@ -211,7 +211,7 @@ public class BacterialRunicMutatorLogic implements ICustomRecipeLogic {
 
                     GTRecipe totalRecipe = StarTRecipeTypes.BACTERIAL_RUNIC_MUTATOR_RECIPES
                         .recipeBuilder(bacteria.getId().getPath().toString() + "_total")
-                        .inputItems(bacteriaInput.copy())
+                        .inputItems(bacteriaInput.copyWithCount(1))
                         .chancedInput(runic, 10_00 ,0)
                         .inputFluids(GTMaterials.DistilledWater.getFluid(8000))
                         .inputFluids(GTMaterials.Mutagen.getFluid( 800))

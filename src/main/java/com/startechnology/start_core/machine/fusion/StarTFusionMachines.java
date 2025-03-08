@@ -14,9 +14,8 @@ import com.gregtechceu.gtceu.common.data.GTBlocks;
 import com.gregtechceu.gtceu.common.data.GTMachines;
 import com.gregtechceu.gtceu.common.data.GTRecipeModifiers;
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
-import com.startechnology.start_core.api.machine.StarTRecipeModifiers;
 import com.startechnology.start_core.machine.StarTMachineUtils;
-
+import com.startechnology.start_core.recipe.StarTRecipeModifiers;
 import com.gregtechceu.gtceu.api.pattern.Predicates;
 
 import net.minecraft.core.Direction;
@@ -40,9 +39,7 @@ public class StarTFusionMachines {
             .langValue("Auxiliary Boosted Fusion Reactor MK %s".formatted(fusionTierString(tier)))
             .recipeType(GTRecipeTypes.FUSION_RECIPES)
             .recipeModifiers(GTRecipeModifiers.DEFAULT_ENVIRONMENT_REQUIREMENT,
-                    StarTRecipeModifiers.limitedParallelHatch(
-                        AuxiliaryBoostedFusionReactor.getParallelCount(tier)
-                    ),
+                    StarTRecipeModifiers.PERFECT_PARALLEL,
                     AuxiliaryBoostedFusionReactor::recipeModifier)
             .tooltips(
                 Component.translatable("start_core.machine.auxiliary_boosted_fusion_reactor.line"),

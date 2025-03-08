@@ -12,6 +12,7 @@ import com.gregtechceu.gtceu.common.data.GTBlocks;
 import com.gregtechceu.gtceu.common.data.machines.GCYMMachines;
 import com.gregtechceu.gtceu.common.machine.multiblock.electric.FusionReactorMachine;
 import com.startechnology.start_core.block.fusion.StarTFusionBlocks;
+import com.startechnology.start_core.machine.parallel.StarTParallelHatches;
 
 import net.minecraft.world.level.block.Block;
 
@@ -37,8 +38,8 @@ public class AuxiliaryBoostedFusionReactor extends FusionReactorMachine {
 
     public static Block getParallelHatch(int tier) {
         return switch (tier) {
-            case GTValues.UHV -> GCYMMachines.PARALLEL_HATCH[GTValues.IV].getBlock();
-            default -> GCYMMachines.PARALLEL_HATCH[GTValues.IV].getBlock();
+            case GTValues.UHV -> StarTParallelHatches.PERFECT_PARALLEL_HATCH[GTValues.UHV].getBlock();
+            default -> StarTParallelHatches.PERFECT_PARALLEL_HATCH[GTValues.UHV].getBlock();
         };
     }
 
