@@ -90,7 +90,7 @@
     "block.start_core.auxiliary_boosted_fusion_casing_mk1": "Auxiliary Boosted Fusion Casing MK I",
     "start_core.machine.fusion_reactor.overclocking": "§7Overclocks double energy and halve duration.",
     "start_core.machine.auxiliary_boosted_fusion_reactor.parallel_info": "§6Auxiliary Parallelisation:", 
-    "start_core.machine.auxiliary_boosted_fusion_reactor.parallel_info_1": "§7Parallel hatches can be used, A maximum of §b{0} §7parallels will be ran at once.",
+    "start_core.machine.auxiliary_boosted_fusion_reactor.parallel_info_1": "§7Any Perfect Parallel Mastery Hatches can be used enabling high rates of production.",
     "block.start_core.auxiliary_fusion_coil_mk1": "Auxiliary Fusion Coil MK I",
 
     "block.start_core.ev_64a_energy_converter":  "§5EV§r 64§eA§r Energy Converter",

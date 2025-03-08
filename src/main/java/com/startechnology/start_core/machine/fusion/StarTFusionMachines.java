@@ -15,6 +15,7 @@ import com.gregtechceu.gtceu.common.data.GTMachines;
 import com.gregtechceu.gtceu.common.data.GTRecipeModifiers;
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
 import com.startechnology.start_core.machine.StarTMachineUtils;
+import com.startechnology.start_core.machine.StarTPartAbility;
 import com.startechnology.start_core.recipe.StarTRecipeModifiers;
 import com.gregtechceu.gtceu.api.pattern.Predicates;
 
@@ -55,7 +56,7 @@ public class StarTFusionMachines {
                 ),
                 Component.literal(""),
                 Component.translatable("start_core.machine.auxiliary_boosted_fusion_reactor.parallel_info"),
-                Component.translatable("start_core.machine.auxiliary_boosted_fusion_reactor.parallel_info_1", AuxiliaryBoostedFusionReactor.getParallelCount(tier)),
+                Component.translatable("start_core.machine.auxiliary_boosted_fusion_reactor.parallel_info_1"),
                 Component.translatable("block.start_core.breaker_line")
             )
             .appearanceBlock(() -> AuxiliaryBoostedFusionReactor.getCasingState(tier))
@@ -96,7 +97,7 @@ public class StarTFusionMachines {
                     .where("F", casing.or(
                         Predicates.blocks(PartAbility.INPUT_ENERGY.getBlockRange(tier, GTValues.UHV).toArray(Block[]::new))
                                 .setMinGlobalLimited(1).setPreviewCount(16)))
-                    .where('@', casing.or(Predicates.blocks(AuxiliaryBoostedFusionReactor.getParallelHatch(tier))))
+                    .where('@', casing.or(Predicates.abilities(StarTPartAbility.PERFECT_PARALLEL_HATCH)))
                     .build();
             })
             .shapeInfos((controller) -> {
