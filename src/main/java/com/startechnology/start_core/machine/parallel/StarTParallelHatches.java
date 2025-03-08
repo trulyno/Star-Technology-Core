@@ -13,7 +13,7 @@ import com.startechnology.start_core.machine.StarTPartAbility;
 import net.minecraft.network.chat.Component;
 
 public class StarTParallelHatches {
-    /* 
+    
     public static final MachineDefinition[] PERFECT_PARALLEL_HATCH = StarTMachineUtils.registerTieredMachines("perfect_parallel_hatch",
         StarTPerfectParallelHatchMachine::new,
         (tier, builder) -> builder
@@ -25,11 +25,12 @@ public class StarTParallelHatches {
                 } + " Perfect Parallel Mastery Hatch")
                 .rotationState(RotationState.ALL)
                 .abilities(StarTPartAbility.PERFECT_PARALLEL_HATCH)
-                .workableTieredHullRenderer(GTCEu.id("block/machines/parallel_hatch_mk" + (tier - 8)))
-                .tooltips(Component.translatable("gtceu.machine.parallel_hatch_mk" + tier + ".tooltip"))
+                .workableTieredHullRenderer(StarTCore.resourceLocation("block/parallel/perfect_parallel_hatch_mk" + (tier - 8)))
+                .tooltips(Component.translatable("start_core.machine.perfect_parallel_hatch_mk" + (tier - 8) + ".tooltip"))
+                .tooltips(Component.translatable("start_core.machine.perfect_parallel_hatch_energy.tooltip"))
                 .register(),
         GTValues.UHV, GTValues.UEV, GTValues.UIV
-    );*/
+    );
 
     public static final MachineDefinition[] PARALLEL_HATCH = StarTMachineUtils.registerTieredMachines("parallel_hatch",
         ParallelHatchPartMachine::new,
