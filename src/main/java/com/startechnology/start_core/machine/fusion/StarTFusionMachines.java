@@ -14,6 +14,7 @@ import com.gregtechceu.gtceu.common.data.GTBlocks;
 import com.gregtechceu.gtceu.common.data.GTMachines;
 import com.gregtechceu.gtceu.common.data.GTRecipeModifiers;
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
+import com.gregtechceu.gtceu.common.machine.multiblock.electric.FusionReactorMachine;
 import com.startechnology.start_core.machine.StarTMachineUtils;
 import com.startechnology.start_core.machine.StarTPartAbility;
 import com.startechnology.start_core.recipe.StarTRecipeModifiers;
@@ -157,5 +158,8 @@ public class StarTFusionMachines {
         GTValues.UHV);
 
     public static void init() {
+        FusionReactorMachine.registerFusionTier(GTValues.UHV, " (AUXI)");
+        FusionReactorMachine.registerFusionTier(GTValues.UEV, " (MKIV)");
+        FusionReactorMachine.registerFusionTier(GTValues.UIV, " (AUXII)");
     }   
 }
