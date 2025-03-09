@@ -19,6 +19,12 @@ public class AkreyriumLine {
     public static void leptonicManifoldQuantiserRecipes(Consumer<FinishedRecipe> provider) {
         GTRecipeType LEPTONIC_MANIFOLD_QUANTISER_TYPE = GTRecipeTypes.get("leptonic_manifold_quantiser");
 
+        if (LEPTONIC_MANIFOLD_QUANTISER_TYPE == null) {
+            System.out.println("Invalid KubeJS Scripts detected, You are missing elements from the Star Technology modpack!");
+            System.out.println("Star Technology Core may not work as expected without the full modpack.");
+            return;
+        }
+
         // KubeJS Interop, get materials registered.
         Material lepton_sparse_akreyrium = GTCEuAPI.materialManager.getMaterial("gtceu:lepton_sparse_akreyrium");
         Material sparse_electron_akreyrium = GTCEuAPI.materialManager.getMaterial("gtceu:sparse_electron_akreyrium");
