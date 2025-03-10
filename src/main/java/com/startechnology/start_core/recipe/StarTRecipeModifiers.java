@@ -8,21 +8,21 @@ import com.gregtechceu.gtceu.api.recipe.content.ContentModifier;
 import com.gregtechceu.gtceu.api.recipe.modifier.ModifierFunction;
 import com.gregtechceu.gtceu.api.recipe.modifier.ParallelLogic;
 import com.gregtechceu.gtceu.api.recipe.modifier.RecipeModifier;
-import com.startechnology.start_core.machine.parallel.IStarTPerfectParallelControllerMixin;
-import com.startechnology.start_core.machine.parallel.IStarTPerfectParallelHatch;
+import com.startechnology.start_core.machine.parallel.IStarTAbsoluteParallelControllerMixin;
+import com.startechnology.start_core.machine.parallel.IStarTAbsoluteParallelHatch;
 
 public class StarTRecipeModifiers {
-    public static final RecipeModifier PERFECT_PARALLEL = StarTRecipeModifiers::hatchPerfectParallel;
+    public static final RecipeModifier ABSOLUTE_PARALLEL = StarTRecipeModifiers::hatchAbsoluteParallel;
 
-    public static ModifierFunction hatchPerfectParallel(MetaMachine machine, GTRecipe recipe) {
+    public static ModifierFunction hatchAbsoluteParallel(MetaMachine machine, GTRecipe recipe) {
         if (machine instanceof IMultiController controller && controller.isFormed()) {
-            IStarTPerfectParallelControllerMixin perfectParallelController = ((IStarTPerfectParallelControllerMixin) (Object) controller);
+            IStarTAbsoluteParallelControllerMixin absoluteParallelController = ((IStarTAbsoluteParallelControllerMixin) (Object) controller);
             
-            IParallelHatch perfectParallelHatch = perfectParallelController.getPerfectParallelHatchStarT();
+            IParallelHatch absoluteParallelHatch = absoluteParallelController.getAbsoluteParallelHatchStarT();
 
-            if (perfectParallelHatch == null) return ModifierFunction.IDENTITY;
+            if (absoluteParallelHatch == null) return ModifierFunction.IDENTITY;
             
-            int parallels = perfectParallelHatch.getCurrentParallel();
+            int parallels = absoluteParallelHatch.getCurrentParallel();
             
             if (parallels == 1) return ModifierFunction.IDENTITY;
 

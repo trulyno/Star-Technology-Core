@@ -38,8 +38,8 @@ public class AuxiliaryBoostedFusionReactor extends FusionReactorMachine {
 
     public static Block getParallelHatch(int tier) {
         return switch (tier) {
-            case GTValues.UHV -> StarTParallelHatches.PERFECT_PARALLEL_HATCH[GTValues.UHV].getBlock();
-            default -> StarTParallelHatches.PERFECT_PARALLEL_HATCH[GTValues.UHV].getBlock();
+            case GTValues.UHV -> StarTParallelHatches.ABSOLUTE_PARALLEL_HATCH[GTValues.UHV].getBlock();
+            default -> StarTParallelHatches.ABSOLUTE_PARALLEL_HATCH[GTValues.UHV].getBlock();
         };
     }
 

@@ -14,20 +14,20 @@ import net.minecraft.network.chat.Component;
 
 public class StarTParallelHatches {
     
-    public static final MachineDefinition[] PERFECT_PARALLEL_HATCH = StarTMachineUtils.registerTieredMachines("perfect_parallel_hatch",
-        StarTPerfectParallelHatchMachine::new,
+    public static final MachineDefinition[] ABSOLUTE_PARALLEL_HATCH = StarTMachineUtils.registerTieredMachines("absolute_parallel_hatch",
+        StarTAbsoluteParallelHatchMachine::new,
         (tier, builder) -> builder
                 .langValue(switch (tier) {
                     case 9 -> "Epic";
                     case 10 -> "Mega";
                     case 11 -> "Hyper";
                     default -> "Unknown";
-                } + " Perfect Parallel Mastery Hatch")
+                } + " Absolute Parallel Mastery Hatch")
                 .rotationState(RotationState.ALL)
-                .abilities(StarTPartAbility.PERFECT_PARALLEL_HATCH)
-                .workableTieredHullRenderer(StarTCore.resourceLocation("block/parallel/perfect_parallel_hatch_mk" + (tier - 8)))
-                .tooltips(Component.translatable("start_core.machine.perfect_parallel_hatch_mk" + (tier - 8) + ".tooltip"))
-                .tooltips(Component.translatable("start_core.machine.perfect_parallel_hatch_energy.tooltip"))
+                .abilities(StarTPartAbility.ABSOLUTE_PARALLEL_HATCH)
+                .workableTieredHullRenderer(StarTCore.resourceLocation("block/parallel/absolute_parallel_hatch_mk" + (tier - 8)))
+                .tooltips(Component.translatable("start_core.machine.absolute_parallel_hatch_mk" + (tier - 8) + ".tooltip"))
+                .tooltips(Component.translatable("start_core.machine.absolute_parallel_hatch_energy.tooltip"))
                 .register(),
         GTValues.UHV, GTValues.UEV, GTValues.UIV
     );

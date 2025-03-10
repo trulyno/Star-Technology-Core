@@ -1,6 +1,6 @@
 package com.startechnology.start_core.machine.parallel;
 
-public interface IStarTPerfectParallelHatch {
+public interface IStarTAbsoluteParallelHatch {
     // Marker interface, should be implemented along with the GTCEU Parallel Hatch
-    // interface to indicate the parallel hatch is a perfect parallel hatch.
+    // interface to indicate the parallel hatch is a absolute parallel hatch.
 }

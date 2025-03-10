@@ -15,10 +15,10 @@ import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
 
 import net.minecraft.util.Mth;
 
-public class StarTPerfectParallelHatchMachine extends TieredPartMachine implements IStarTPerfectParallelHatch, IParallelHatch {
+public class StarTAbsoluteParallelHatchMachine extends TieredPartMachine implements IStarTAbsoluteParallelHatch, IParallelHatch {
 
     protected static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(
-            StarTPerfectParallelHatchMachine.class, MultiblockPartMachine.MANAGED_FIELD_HOLDER);
+            StarTAbsoluteParallelHatchMachine.class, MultiblockPartMachine.MANAGED_FIELD_HOLDER);
     private static final int MIN_PARALLEL = 1;
 
     private final int maxParallel;
@@ -28,7 +28,7 @@ public class StarTPerfectParallelHatchMachine extends TieredPartMachine implemen
         return currentParallel;
     }
 
-    public StarTPerfectParallelHatchMachine(IMachineBlockEntity holder, int tier) {
+    public StarTAbsoluteParallelHatchMachine(IMachineBlockEntity holder, int tier) {
         super(holder, tier);
         this.maxParallel = (int) Math.pow(4, tier - GTValues.UV);
     }

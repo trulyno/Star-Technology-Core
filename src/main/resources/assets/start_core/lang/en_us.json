@@ -90,7 +90,7 @@
     "block.start_core.auxiliary_boosted_fusion_casing_mk1": "Auxiliary Boosted Fusion Casing MK I",
     "start_core.machine.fusion_reactor.overclocking": "§7Overclocks double energy and halve duration.",
     "start_core.machine.auxiliary_boosted_fusion_reactor.parallel_info": "§6Auxiliary Parallelisation:", 
-    "start_core.machine.auxiliary_boosted_fusion_reactor.parallel_info_1": "§7Any Perfect Parallel Mastery Hatches can be used enabling high rates of production.",
+    "start_core.machine.auxiliary_boosted_fusion_reactor.parallel_info_1": "§7Any Absolute Parallel Mastery Hatches can be used enabling high rates of production.",
     "block.start_core.auxiliary_fusion_coil_mk1": "Auxiliary Fusion Coil MK I",
 
     "block.start_core.ev_64a_energy_converter":  "§5EV§r 64§eA§r Energy Converter",
@@ -114,11 +114,11 @@
     "block.start_core.uev_parallel_hatch": "Mega Parallel Control Hatch",
     "block.start_core.uiv_parallel_hatch": "Hyper Parallel Control Hatch",
 
-    "start_core.machine.perfect_parallel_hatch_mk1.tooltip": "Allows to run up to 4 recipes in parallel.",
-    "start_core.machine.perfect_parallel_hatch_mk2.tooltip": "Allows to run up to 16 recipes in parallel.",
-    "start_core.machine.perfect_parallel_hatch_mk3.tooltip": "Allows to run up to 64 recipes in parallel.",
-    "start_core.machine.perfect_parallel_hatch_energy.tooltip": "§6Without extra energy consumption per parallel.",
-    "block.start_core.uhv_perfect_parallel_hatch": "Epic Perfect Parallel Mastery Hatch",
-    "block.start_core.uev_perfect_parallel_hatch": "Mega Perfect Parallel Mastery Hatch",
-    "block.start_core.uiv_perfect_parallel_hatch": "Hyper Perfect Parallel Mastery Hatch"
+    "start_core.machine.absolute_parallel_hatch_mk1.tooltip": "Allows to run up to 4 recipes in parallel.",
+    "start_core.machine.absolute_parallel_hatch_mk2.tooltip": "Allows to run up to 16 recipes in parallel.",
+    "start_core.machine.absolute_parallel_hatch_mk3.tooltip": "Allows to run up to 64 recipes in parallel.",
+    "start_core.machine.absolute_parallel_hatch_energy.tooltip": "§6Without extra energy consumption per parallel.",
+    "block.start_core.uhv_absolute_parallel_hatch": "Epic Absolute Parallel Mastery Hatch",
+    "block.start_core.uev_absolute_parallel_hatch": "Mega Absolute Parallel Mastery Hatch",
+    "block.start_core.uiv_absolute_parallel_hatch": "Hyper Absolute Parallel Mastery Hatch"
 }   

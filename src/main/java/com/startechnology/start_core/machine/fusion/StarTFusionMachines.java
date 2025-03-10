@@ -41,7 +41,7 @@ public class StarTFusionMachines {
             .langValue("Auxiliary Boosted Fusion Reactor MK %s".formatted(fusionTierString(tier)))
             .recipeType(GTRecipeTypes.FUSION_RECIPES)
             .recipeModifiers(GTRecipeModifiers.DEFAULT_ENVIRONMENT_REQUIREMENT,
-                    StarTRecipeModifiers.PERFECT_PARALLEL,
+                    StarTRecipeModifiers.ABSOLUTE_PARALLEL,
                     AuxiliaryBoostedFusionReactor::recipeModifier)
             .tooltips(
                 Component.translatable("start_core.machine.auxiliary_boosted_fusion_reactor.line"),
@@ -98,7 +98,7 @@ public class StarTFusionMachines {
                     .where("F", casing.or(
                         Predicates.blocks(PartAbility.INPUT_ENERGY.getBlockRange(tier, GTValues.UHV).toArray(Block[]::new))
                                 .setMinGlobalLimited(1).setPreviewCount(16)))
-                    .where('@', casing.or(Predicates.abilities(StarTPartAbility.PERFECT_PARALLEL_HATCH)))
+                    .where('@', casing.or(Predicates.abilities(StarTPartAbility.ABSOLUTE_PARALLEL_HATCH)))
                     .build();
             })
             .shapeInfos((controller) -> {

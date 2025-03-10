@@ -8,7 +8,7 @@
     "CustomStackTooltipsHandlerMixin",
     "FusionEnergyPowerMixin",
     "ConverterRendererMixin",
-    "PerfectParallelControllerMixin"
+    "AbsoluteParallelControllerMixin"
   ],
   "client": [
   ],
