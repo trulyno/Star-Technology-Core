@@ -17,13 +17,11 @@ public class StarTRecipeModifiers {
     public static ModifierFunction hatchAbsoluteParallel(MetaMachine machine, GTRecipe recipe) {
         if (machine instanceof IMultiController controller && controller.isFormed()) {
             IStarTAbsoluteParallelControllerMixin absoluteParallelController = ((IStarTAbsoluteParallelControllerMixin) (Object) controller);
-            
-            IParallelHatch absoluteParallelHatch = absoluteParallelController.getAbsoluteParallelHatchStarT();
 
-            if (absoluteParallelHatch == null) return ModifierFunction.IDENTITY;
-            
-            int parallels = absoluteParallelHatch.getCurrentParallel();
-            
+            int parallels = absoluteParallelController.getAbsoluteParallelHatchStarT()
+                    .map(hatch -> ParallelLogic.getParallelAmount(machine, recipe, hatch.getCurrentParallel()))
+                    .orElse(1);
+                    
             if (parallels == 1) return ModifierFunction.IDENTITY;
 
             return ModifierFunction.builder()
