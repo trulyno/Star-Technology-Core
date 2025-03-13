@@ -11,22 +11,23 @@ import com.gregtechceu.gtceu.api.machine.multiblock.part.MultiblockPartMachine;
 import com.gregtechceu.gtceu.api.machine.multiblock.part.TieredPartMachine;
 import com.lowdragmc.lowdraglib.gui.widget.Widget;
 import com.lowdragmc.lowdraglib.gui.widget.WidgetGroup;
+import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
 
+import lombok.Getter;
 import net.minecraft.util.Mth;
 
-public class StarTAbsoluteParallelHatchMachine extends TieredPartMachine implements IStarTAbsoluteParallelHatch, IParallelHatch {
+public class StarTAbsoluteParallelHatchMachine extends TieredPartMachine implements IFancyUIMachine, IStarTAbsoluteParallelHatch, IParallelHatch {
 
     protected static final ManagedFieldHolder MANAGED_FIELD_HOLDER = new ManagedFieldHolder(
             StarTAbsoluteParallelHatchMachine.class, MultiblockPartMachine.MANAGED_FIELD_HOLDER);
     private static final int MIN_PARALLEL = 1;
 
     private final int maxParallel;
-    private int currentParallel = 1;
 
-    public int getCurrentParallel() {
-        return currentParallel;
-    }
+    @Persisted
+    @Getter
+    private int currentParallel = 1;
 
     public StarTAbsoluteParallelHatchMachine(IMachineBlockEntity holder, int tier) {
         super(holder, tier);
@@ -52,6 +53,7 @@ public class StarTAbsoluteParallelHatchMachine extends TieredPartMachine impleme
         return parallelAmountGroup;
     }
 
+    @Override
     public ManagedFieldHolder getFieldHolder() {
         return MANAGED_FIELD_HOLDER;
     }
