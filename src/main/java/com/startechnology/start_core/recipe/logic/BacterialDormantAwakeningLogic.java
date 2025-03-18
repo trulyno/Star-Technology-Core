@@ -86,7 +86,7 @@ public class BacterialDormantAwakeningLogic implements ICustomRecipeLogic {
     }
 
     private GTRecipe createDormantAwakeningRecipe(NotifiableItemStackHandler handler) {
-                for (int i = 0; i < handler.getSlots(); ++i) {
+        for (int i = 0; i < handler.getSlots(); ++i) {
             ItemStack itemInSlot = handler.getStackInSlot(i);
             
             if (itemInSlot == null) continue;

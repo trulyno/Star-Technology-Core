@@ -62,12 +62,12 @@ public class BacterialHydrocarbonHarvesterLogic implements ICustomRecipeLogic {
             if (!itemInSlot.isEmpty()) {
                 StarTBacteriaBehaviour bacteriaBehaviour = StarTBacteriaBehaviour.getBacteriaBehaviour(itemInSlot);
 
-                if (bacteriaBehaviour == null) return null;
+                if (bacteriaBehaviour == null) continue;
     
                 // Current stats
                 StarTBacteriaStats existingStats = StarTBacteriaManager.bacteriaStatsFromTag(itemInSlot);
     
-                if (existingStats == null) return null;
+                if (existingStats == null) continue;
 
                 FluidStack bacterialInputSludge = GTMaterials.EnrichedBacterialSludge.getFluid(
                     25 * (2 << existingStats.getMetabolism())
