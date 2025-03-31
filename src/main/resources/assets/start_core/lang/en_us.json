@@ -120,5 +120,11 @@
     "start_core.machine.absolute_parallel_hatch_energy.tooltip": "§6Without extra energy consumption per parallel.",
     "block.start_core.uhv_absolute_parallel_hatch": "Epic Absolute Parallel Mastery Hatch",
     "block.start_core.uev_absolute_parallel_hatch": "Mega Absolute Parallel Mastery Hatch",
-    "block.start_core.uiv_absolute_parallel_hatch": "Hyper Absolute Parallel Mastery Hatch"
+    "block.start_core.uiv_absolute_parallel_hatch": "Hyper Absolute Parallel Mastery Hatch",
+
+    "block.start_core.enriched_naquadah_drum": "Enriched Naquadah Drum",
+    "block.start_core.neutronium_drum": "Neutronium Drum",
+
+    "item.start_core.enriched_naquadah_fluid_cell": "Enriched Naquadah Fluid Cell",
+    "item.start_core.neutronium_fluid_cell": "Neutronium Fluid Cell"
 }   
