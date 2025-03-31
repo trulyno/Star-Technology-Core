@@ -41,8 +41,8 @@ public class StarTItems {
         })))
         .register();
 
-    public static ItemEntry<ComponentItem> FLUID_CELL_LARGE_ENRICHED_NAQUADAH = createFluidCell(GTMaterials.NaquadahEnriched, 1024, 12, 16, true, false, false);
-    public static ItemEntry<ComponentItem> FLUID_CELL_LARGE_NEUTRONIUM = createFluidCell(GTMaterials.Neutronium, 2048, 16, 8, true, true, true);
+    public static ItemEntry<ComponentItem> FLUID_CELL_LARGE_ENRICHED_NAQUADAH = createFluidCell(GTMaterials.NaquadahEnriched, 768, 12, 16, true, true, false);
+    public static ItemEntry<ComponentItem> FLUID_CELL_LARGE_NEUTRONIUM = createFluidCell(GTMaterials.Neutronium, 1024, 16, 8, true, true, true);
 
     public static ItemEntry<ComponentItem> createFluidCell(Material mat, int capacity, int matSize, int stackSize, boolean acidProof, boolean cryoProof, boolean plasmaProof) {
         var prop = mat.getProperty(PropertyKey.FLUID_PIPE);
