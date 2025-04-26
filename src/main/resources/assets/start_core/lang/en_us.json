@@ -126,5 +126,7 @@
     "block.start_core.neutronium_drum": "Neutronium Drum",
 
     "item.start_core.enriched_naquadah_fluid_cell": "Enriched Naquadah Fluid Cell",
-    "item.start_core.neutronium_fluid_cell": "Neutronium Fluid Cell"
+    "item.start_core.neutronium_fluid_cell": "Neutronium Fluid Cell",
+
+    "block.start_core.dream_link_energy_hatch_tooltip": "§7Wirelessly recieving energy from transmission towers"
 }   
