@@ -61,5 +61,10 @@ public class StarTDreamLinkHatches {
         GTValues.tiersBetween(GTValues.UV, GTValues.MAX)
     );
 
+    public static final MachineDefinition[] DREAM_LINK_HATCH_16384 = registerDreamLinkHatch(16384, PartAbility.INPUT_ENERGY, 
+        GTValues.tiersBetween(GTValues.UV, GTValues.MAX)
+    );
+
+
     public static void init() {}
 }

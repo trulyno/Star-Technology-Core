@@ -142,13 +142,14 @@ def generate_overlayed_sheets(
             sheet.paste(frm, (x, y), frm)
 
         amps = {
-            6: "2",
-            5: "4",
-            4: "16",
-            3: "64",
-            2: "256",
-            1: "1024",
-            0: "4096"
+            7: "2",
+            6: "4",
+            5: "16",
+            4: "64",
+            3: "256",
+            2: "1024",
+            1: "4096",
+            0: "16384"
         }
 
         filename = f"{tier}_{amps[idx]}a_energy_hatch/{output}"
