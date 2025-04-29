@@ -124,6 +124,10 @@ repositories {
             includeGroup "appeng"
         }
     }
+
+    maven {
+        url "https://maven.ftb.dev/releases"
+    }
 }
 
 dependencies {
@@ -143,6 +147,8 @@ dependencies {
     modCompileOnly("mezz.jei:jei-$project.minecraft_version-forge-api:$project.jei_version") { transitive = false }
     modCompileOnly("mezz.jei:jei-$project.minecraft_version-common-api:$project.jei_version") { transitive = false }
 
+    modImplementation("dev.ftb.mods:ftb-library-forge:2001.2.9")
+    modImplementation("dev.ftb.mods:ftb-teams-forge:2001.3.1")
     modImplementation("com.gregtechceu.gtceu:gtceu-$project.minecraft_version:$project.gtceu_version") { transitive = false }
     modImplementation("com.lowdragmc.ldlib:ldlib-forge-$project.minecraft_version:$project.ldlib_version") { transitive = false }
     modImplementation("com.tterrag.registrate:Registrate:$project.registrate_version")
