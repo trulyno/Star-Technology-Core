@@ -6,7 +6,7 @@ import com.gregtechceu.gtceu.api.blockentity.MetaMachineBlockEntity;
 import com.gregtechceu.gtceu.api.capability.IEnergyContainer;
 import com.gregtechceu.gtceu.api.capability.forge.GTCapability;
 import com.gregtechceu.gtceu.api.machine.MetaMachine;
-import com.startechnology.start_core.api.IStarTDreamLinkFrequencyMachine;
+import com.startechnology.start_core.api.IStarTDreamLinkNetworkMachine;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -16,9 +16,9 @@ import net.minecraftforge.common.util.LazyOptional;
 
 public class StarTCapabilityHelper {
     private static <T> LazyOptional<T> getCapabilityFromMachine(Capability<T> capability, MetaMachine machine) {
-        if (capability == StarTCapability.CAPABILITY_DREAM_LINK_FREQUENCY_MACHINE) {
-            if (machine instanceof IStarTDreamLinkFrequencyMachine dreamLinkFrequencyMachine) {
-                return StarTCapability.CAPABILITY_DREAM_LINK_FREQUENCY_MACHINE.orEmpty(capability, LazyOptional.of(() -> dreamLinkFrequencyMachine));
+        if (capability == StarTCapability.CAPABILITY_DREAM_LINK_NETWORK_MACHINE) {
+            if (machine instanceof IStarTDreamLinkNetworkMachine dreamLinkNetworkMachine) {
+                return StarTCapability.CAPABILITY_DREAM_LINK_NETWORK_MACHINE.orEmpty(capability, LazyOptional.of(() -> dreamLinkNetworkMachine));
             }
         }
 
@@ -39,7 +39,7 @@ public class StarTCapabilityHelper {
     }
 
     @Nullable
-    public static IStarTDreamLinkFrequencyMachine getDreamLinkFrequencyMachine(Level level, BlockPos pos, @Nullable Direction side) {
-        return getBlockEntityCapability(StarTCapability.CAPABILITY_DREAM_LINK_FREQUENCY_MACHINE, level, pos, side);
+    public static IStarTDreamLinkNetworkMachine getDreamLinkNetworkMachine(Level level, BlockPos pos, @Nullable Direction side) {
+        return getBlockEntityCapability(StarTCapability.CAPABILITY_DREAM_LINK_NETWORK_MACHINE, level, pos, side);
     }
 }

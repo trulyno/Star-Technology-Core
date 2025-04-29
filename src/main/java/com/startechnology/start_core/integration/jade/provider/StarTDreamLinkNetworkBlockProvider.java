@@ -8,7 +8,7 @@ import com.gregtechceu.gtceu.api.machine.feature.multiblock.IMaintenanceMachine;
 import com.gregtechceu.gtceu.api.machine.feature.multiblock.IMultiController;
 import com.gregtechceu.gtceu.integration.jade.provider.CapabilityBlockProvider;
 import com.startechnology.start_core.StarTCore;
-import com.startechnology.start_core.api.IStarTDreamLinkFrequencyMachine;
+import com.startechnology.start_core.api.IStarTDreamLinkNetworkMachine;
 import com.startechnology.start_core.api.capability.StarTCapabilityHelper;
 
 import net.minecraft.core.BlockPos;
@@ -24,42 +24,44 @@ import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
 
-public class StarTDreamLinkFrequencyBlockProvider extends CapabilityBlockProvider<IStarTDreamLinkFrequencyMachine> {
+public class StarTDreamLinkNetworkBlockProvider extends CapabilityBlockProvider<IStarTDreamLinkNetworkMachine> {
 
-    public StarTDreamLinkFrequencyBlockProvider() {
-        super(StarTCore.resourceLocation("dream_link_freq_info"));
+    public StarTDreamLinkNetworkBlockProvider() {
+        super(StarTCore.resourceLocation("dream_link_network_info"));
     }
 
     @Override
-    protected @Nullable IStarTDreamLinkFrequencyMachine getCapability(Level level, BlockPos pos,
+    protected @Nullable IStarTDreamLinkNetworkMachine getCapability(Level level, BlockPos pos,
             @Nullable Direction side) {
-        var capability = StarTCapabilityHelper.getDreamLinkFrequencyMachine(level, pos, side);
+        var capability = StarTCapabilityHelper.getDreamLinkNetworkMachine(level, pos, side);
 
         if (capability != null)
             return capability;
 
         if (MetaMachine.getMachine(level, pos) instanceof IMultiController controller) {
             for (var part : controller.getParts()) {
-                if (part instanceof IStarTDreamLinkFrequencyMachine dreamLinkFrequencyMachine) {
-                    return dreamLinkFrequencyMachine;
+                if (part instanceof IStarTDreamLinkNetworkMachine dreamLinkNetworkMachine) {
+                    return dreamLinkNetworkMachine;
                 }
             }
         }
         return null;
     }
 
+    /* Used for storing data for the addTooltip method ? */
     @Override
-    protected void write(CompoundTag data, IStarTDreamLinkFrequencyMachine capability) {
-        data.putString("frequency", capability.getFrequency());
+    protected void write(CompoundTag data, IStarTDreamLinkNetworkMachine capability) {
+        data.putString("network", capability.getNetwork());
     }
 
+    /* Adds a new tooltip under the Jade stuff */
     @Override
     protected void addTooltip(CompoundTag capData, ITooltip tooltip, Player player, BlockAccessor block,
             BlockEntity blockEntity, IPluginConfig config) {
-        if (capData.contains("frequency"))
+        if (capData.contains("network"))
         {
-            String frequency = capData.getString("frequency");
-            tooltip.add(Component.translatable("start_core.machine.dream_link.frequency", frequency));
+            String network = capData.getString("network");
+            tooltip.add(Component.translatable("start_core.machine.dream_link.network", network));
         }
     }
     
