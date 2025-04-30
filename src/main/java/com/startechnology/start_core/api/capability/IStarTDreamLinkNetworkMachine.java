@@ -1,4 +1,4 @@
-package com.startechnology.start_core.api;
+package com.startechnology.start_core.api.capability;
 
 public interface IStarTDreamLinkNetworkMachine {
     String DEFAULT_NETWORK = "Untitled Network";

@@ -6,7 +6,6 @@ import com.gregtechceu.gtceu.api.blockentity.MetaMachineBlockEntity;
 import com.gregtechceu.gtceu.api.capability.IEnergyContainer;
 import com.gregtechceu.gtceu.api.capability.forge.GTCapability;
 import com.gregtechceu.gtceu.api.machine.MetaMachine;
-import com.startechnology.start_core.api.IStarTDreamLinkNetworkMachine;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

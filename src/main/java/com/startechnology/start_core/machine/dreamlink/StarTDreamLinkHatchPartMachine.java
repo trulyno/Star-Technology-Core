@@ -22,7 +22,7 @@ import com.lowdragmc.lowdraglib.gui.widget.Widget;
 import com.lowdragmc.lowdraglib.gui.widget.WidgetGroup;
 import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
-import com.startechnology.start_core.api.IStarTDreamLinkNetworkMachine;
+import com.startechnology.start_core.api.capability.IStarTDreamLinkNetworkMachine;
 import com.startechnology.start_core.api.capability.StarTNotifiableDreamLinkContainer;
 
 import net.minecraft.ChatFormatting;
@@ -85,12 +85,29 @@ public class StarTDreamLinkHatchPartMachine extends TieredIOPartMachine implemen
         else
             componentList.add(Component.translatable("start_core.machine.dream_link.not_active"));
         
+        if (this.getHolder().getOwner() != null) {
+            componentList.add(Component
+            .translatable("start_core.machine.dream_link.owned_title")
+            .withStyle(Style.EMPTY.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+                    Component.translatable("start_core.machine.dream_link.hatch.owned_hover")))));
+
+            MutableComponent ownerComponent = Component.literal(this.getHolder().getOwner().getName());
+
+            componentList.add(Component
+                .translatable("start_core.machine.dream_link.owner", ownerComponent)
+                .withStyle(Style.EMPTY.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+                        Component.translatable("start_core.machine.dream_link.hatch.owned_hover")))));
+    
+        }
+
         MutableComponent inAmountComponent = Component.literal(FormattingUtil.formatNumbers(this.container.getInputPerSec() / 20))
             .setStyle(Style.EMPTY.withColor(ChatFormatting.GREEN));
         componentList.add(Component
-                .translatable("start_core.machine.dream_link.hatch.input_per_sec", inAmountComponent)
+                .translatable("start_core.machine.dream_link.input_per_sec", inAmountComponent)
                 .withStyle(Style.EMPTY.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                         Component.translatable("start_core.machine.dream_link.hatch.input_per_sec_hover")))));
+
+            
     }   
 
     @Override

@@ -8,7 +8,7 @@ import com.gregtechceu.gtceu.api.machine.feature.multiblock.IMaintenanceMachine;
 import com.gregtechceu.gtceu.api.machine.feature.multiblock.IMultiController;
 import com.gregtechceu.gtceu.integration.jade.provider.CapabilityBlockProvider;
 import com.startechnology.start_core.StarTCore;
-import com.startechnology.start_core.api.IStarTDreamLinkNetworkMachine;
+import com.startechnology.start_core.api.capability.IStarTDreamLinkNetworkMachine;
 import com.startechnology.start_core.api.capability.StarTCapabilityHelper;
 
 import net.minecraft.core.BlockPos;
