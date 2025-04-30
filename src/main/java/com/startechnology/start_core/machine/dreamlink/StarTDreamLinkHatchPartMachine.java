@@ -1,5 +1,7 @@
 package com.startechnology.start_core.machine.dreamlink;
 
+import java.util.List;
+
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.gui.GuiTextures;
@@ -10,7 +12,9 @@ import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.feature.IFancyUIMachine;
 import com.gregtechceu.gtceu.api.machine.feature.multiblock.IMultiController;
 import com.gregtechceu.gtceu.api.machine.multiblock.part.TieredIOPartMachine;
+import com.gregtechceu.gtceu.utils.FormattingUtil;
 import com.lowdragmc.lowdraglib.gui.modular.ModularUI;
+import com.lowdragmc.lowdraglib.gui.widget.ComponentPanelWidget;
 import com.lowdragmc.lowdraglib.gui.widget.DraggableScrollableWidgetGroup;
 import com.lowdragmc.lowdraglib.gui.widget.LabelWidget;
 import com.lowdragmc.lowdraglib.gui.widget.TextFieldWidget;
@@ -21,7 +25,12 @@ import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
 import com.startechnology.start_core.api.IStarTDreamLinkNetworkMachine;
 import com.startechnology.start_core.api.capability.StarTNotifiableDreamLinkContainer;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.HoverEvent;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextColor;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.BlockHitResult;
@@ -70,22 +79,36 @@ public class StarTDreamLinkHatchPartMachine extends TieredIOPartMachine implemen
         return super.tintColor(index);
     }
 
+    private void addComponentPanelText(List<Component> componentList) {
+        if (this.container.getInputPerSec() > 0) 
+            componentList.add(Component.translatable("start_core.machine.dream_link.active"));
+        else
+            componentList.add(Component.translatable("start_core.machine.dream_link.not_active"));
+        
+        MutableComponent inAmountComponent = Component.literal(FormattingUtil.formatNumbers(this.container.getInputPerSec() / 20))
+            .setStyle(Style.EMPTY.withColor(ChatFormatting.GREEN));
+        componentList.add(Component
+                .translatable("start_core.machine.dream_link.hatch.input_per_sec", inAmountComponent)
+                .withStyle(Style.EMPTY.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+                        Component.translatable("start_core.machine.dream_link.hatch.input_per_sec_hover")))));
+    }   
+
     @Override
     public Widget createUIWidget() {
-        var group = new WidgetGroup(0, 0, 182 + 8, 117 + 8);
+        WidgetGroup group = new WidgetGroup(0, 0, 182 + 8, 117 + 8);
         group.addWidget(
             new DraggableScrollableWidgetGroup(4, 4, 182, 117).setBackground(GuiTextures.DISPLAY)
-                .addWidget(new LabelWidget(4, 5, "Dream-Link Config"))
-                
-                .addWidget(new LabelWidget(4, 17, "§7Dream-Network Identifier"))
+                .addWidget(new LabelWidget(4, 5, "Dream-Link Hatch"))
+                .addWidget(new LabelWidget(4, 20, "§7Dream-Network Identifier"))
                 .addWidget(
-                    new TextFieldWidget(4, 29, 182 - 8, 12, this::getNetwork, this::setNetwork)
+                    new TextFieldWidget(4, 32, 182 - 8, 12, this::getNetwork, this::setNetwork)
                         .setMaxStringLength(64)
                         .setValidator(input -> {
                             if (input == null || input.isBlank()) return IStarTDreamLinkNetworkMachine.DEFAULT_NETWORK + "";
                             return input;
                         })
                         .setHoverTooltips(Component.translatable("start_core.machine.dream_link.network_set_hover"))
+                ).addWidget(new ComponentPanelWidget(4, 52, this::addComponentPanelText)
                 )
         );
         
@@ -96,6 +119,7 @@ public class StarTDreamLinkHatchPartMachine extends TieredIOPartMachine implemen
     @Override
     public ModularUI createUI(Player entityPlayer) {
         return new ModularUI(198, 208, this, entityPlayer).widget(new FancyMachineUIWidget(this, 198, 208));
+        
     }
 
 
