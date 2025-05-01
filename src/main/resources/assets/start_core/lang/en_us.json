@@ -202,5 +202,8 @@
     "start_core.machine.dream_link.tower.output_per_sec_hover": "EU being transferred from this tower in the last second expressed in per tick",
     "start_core.machine.dream_link.tower.owner_hover": "EU will only be transmitted to hatches owned by this team/player.",
     "start_core.machine.dream_link.hatch.owned_hover": "The team/player that owns this hatch.",
+    "start_core.machine.dream_link.data_stick.name": "§oDream-Link Network §6{0}",
+    "start_core.machine.dream_link.copy_network": "Saved network to Data Stick",
+    "start_core.machine.dream_link.set_network": "Applied network from Data Stick",
     "config.jade.plugin_start_core.dream_link_network_info": "[Star Technology] Dream-Link Network Info"
 }   

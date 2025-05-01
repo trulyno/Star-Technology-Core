@@ -9,6 +9,7 @@ import com.gregtechceu.gtceu.api.gui.fancy.FancyMachineUIWidget;
 import com.gregtechceu.gtceu.api.gui.fancy.IFancyTooltip;
 import com.gregtechceu.gtceu.api.gui.fancy.TooltipsPanel;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
+import com.gregtechceu.gtceu.api.machine.feature.IDataStickInteractable;
 import com.gregtechceu.gtceu.api.machine.feature.IFancyUIMachine;
 import com.gregtechceu.gtceu.api.machine.feature.multiblock.IMultiController;
 import com.gregtechceu.gtceu.api.machine.multiblock.part.TieredIOPartMachine;
@@ -26,13 +27,15 @@ import com.startechnology.start_core.api.capability.IStarTDreamLinkNetworkMachin
 import com.startechnology.start_core.api.capability.StarTNotifiableDreamLinkContainer;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.HoverEvent;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
-import net.minecraft.network.chat.TextColor;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.BlockHitResult;
 
 public class StarTDreamLinkHatchPartMachine extends TieredIOPartMachine implements IStarTDreamLinkNetworkMachine {
@@ -148,5 +151,32 @@ public class StarTDreamLinkHatchPartMachine extends TieredIOPartMachine implemen
     @Override
     public String getNetwork() {
         return this.network;
+    }
+
+    @Override
+    public final InteractionResult onDataStickShiftUse(Player player, ItemStack dataStick) {
+        if (!isRemote()) {
+            CompoundTag tag = new CompoundTag();
+            tag.putString("dream_network", this.getNetwork());
+            dataStick.setTag(tag);
+            dataStick.setHoverName(Component.translatable("start_core.machine.dream_link.data_stick.name", this.getNetwork()));
+            player.sendSystemMessage(Component.translatable("start_core.machine.dream_link.copy_network"));
+        }
+        return InteractionResult.SUCCESS;
+    }
+
+    @Override
+    public final InteractionResult onDataStickUse(Player player, ItemStack dataStick) {
+        CompoundTag tag = dataStick.getTag();
+        if (tag == null || !tag.contains("dream_network")) {
+            return InteractionResult.PASS;
+        }
+
+        if (!isRemote()) {
+            String network = tag.getString("dream_network");
+            this.setNetwork(network);
+            player.sendSystemMessage(Component.translatable("start_core.machine.dream_link.set_network"));
+        }
+        return InteractionResult.sidedSuccess(isRemote());
     }
 }
