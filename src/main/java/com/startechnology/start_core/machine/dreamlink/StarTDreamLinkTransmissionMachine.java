@@ -33,6 +33,7 @@ import com.lowdragmc.lowdraglib.gui.widget.Widget;
 import com.lowdragmc.lowdraglib.gui.widget.WidgetGroup;
 import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
 import com.startechnology.start_core.api.capability.IStarTDreamLinkNetworkMachine;
+import com.startechnology.start_core.api.capability.IStarTDreamLinkNetworkRecieveEnergy;
 import com.startechnology.start_core.api.capability.StarTNotifiableDreamLinkContainer;
 
 import it.unimi.dsi.fastutil.longs.Long2ObjectMaps;
@@ -48,6 +49,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import rx.Observable;
 
 public class StarTDreamLinkTransmissionMachine extends WorkableMultiblockMachine implements IStarTDreamLinkNetworkMachine, IFancyUIMachine, IDisplayUIMachine {
@@ -56,20 +58,23 @@ public class StarTDreamLinkTransmissionMachine extends WorkableMultiblockMachine
     protected ConditionalSubscriptionHandler tickSubscription;
     protected TickableSubscription tryTickSub;
 
-    private Observable<Entry<StarTDreamLinkHatchPartMachine, Geometry>> recieverCache;
+    private Observable<Entry<IStarTDreamLinkNetworkRecieveEnergy, Geometry>> recieverCache;
     private boolean isReadyToTransmit;
 
     /* Store the network of the tower */
     @Persisted
     protected String network;
 
+    private Integer range;
+    private Integer recieverCount;
 
-    public StarTDreamLinkTransmissionMachine(IMachineBlockEntity holder) {
+    public StarTDreamLinkTransmissionMachine(IMachineBlockEntity holder, Integer range) {
         super(holder);
         this.tickSubscription = new ConditionalSubscriptionHandler(this, this::transferEnergyTick, this::isFormed);
         this.isReadyToTransmit = false;
         this.inputHatches = new EnergyContainerList(new ArrayList<>());
         this.network = IStarTDreamLinkNetworkMachine.DEFAULT_NETWORK;
+        this.range = range;
     }
 
     @Override
@@ -132,7 +137,7 @@ public class StarTDreamLinkTransmissionMachine extends WorkableMultiblockMachine
         // Lower frequency every second try transfer.
         // This is so that if we have all our buffers full
         // we can still transfer out/attempt after etc.
-        if (getOffsetTimer() % 20 == 0 && this.isReadyToTransmit) {
+        if (getOffsetTimer() % 60 == 0 && this.isReadyToTransmit) {
             updateTransferCache();
             transferEnergyTick();
         }
@@ -153,20 +158,27 @@ public class StarTDreamLinkTransmissionMachine extends WorkableMultiblockMachine
             String thisNetwork = this.getNetwork();
 
             // Get dream-link hatches
-            Observable<Entry<StarTDreamLinkHatchPartMachine, Geometry>> machines = StarTDreamLinkManager.getPartMachines(x + 5, z + 5, x - 5, z - 5)
+            Observable<Entry<IStarTDreamLinkNetworkRecieveEnergy, Geometry>> machines = StarTDreamLinkManager.getDevices(x + range, z + range, x - range, z - range)
                 .filter(machine -> {
-                    StarTDreamLinkHatchPartMachine part = machine.value();
+                    return machine.value().canRecieve(this);
+                }).sorted((machinea, machineb) -> {
+                    IStarTDreamLinkNetworkRecieveEnergy parta = machinea.value();
+                    IStarTDreamLinkNetworkRecieveEnergy partb = machineb.value();
 
-                    if (!Objects.equals(part.getNetwork(), thisNetwork))
-                        return false;
-
-                    if (!Objects.equals(part.getHolder().getOwner().getUUID(), thisUUID))
-                        return false;
+                    // Manhatten distnace of each
+                    BlockPos aPos = parta.devicePos();
+                    BlockPos bPos = partb.devicePos();
                     
-                    return true;
+                    return this.getSquaredDistanceToThis(aPos).compareTo(this.getSquaredDistanceToThis(bPos));
                 });
+            
+            recieverCount = machines.count().toBlocking().first();
             recieverCache = machines;
         }
+    }
+
+    private Double getSquaredDistanceToThis(BlockPos otherPos) {
+        return otherPos.getCenter().distanceToSqr(this.getPos().getCenter());
     }
 
     protected void transferEnergyTick() {
@@ -180,14 +192,12 @@ public class StarTDreamLinkTransmissionMachine extends WorkableMultiblockMachine
             }
 
             recieverCache.forEach((entry) -> {
+                IStarTDreamLinkNetworkRecieveEnergy device = entry.value();
+
                 long energyStored = inputHatches.getEnergyStored();
 
-                StarTDreamLinkHatchPartMachine hatch = entry.value();
+                long hatchEnergyChange = device.recieveEnergy(energyStored);
 
-                StarTNotifiableDreamLinkContainer container = hatch.container;
-                
-                long hatchEnergyChange = container.changeEnergy(Math.min(energyStored, container.getInputVoltage() * container.getInputAmperage()));
-                
                 inputHatches.removeEnergy(hatchEnergyChange);
             });
         }
@@ -250,6 +260,29 @@ public class StarTDreamLinkTransmissionMachine extends WorkableMultiblockMachine
             Component.translatable("start_core.machine.dream_link.total_buffer_value", totalBufferComponent)
             .withStyle(Style.EMPTY.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                     Component.translatable("start_core.machine.dream_link.tower.total_buffer_hover")))));
+
+        if (this.range != -1) {
+            MutableComponent rangeComponent = Component.literal(FormattingUtil.formatNumbers(this.range))
+                .setStyle(Style.EMPTY.withColor(ChatFormatting.GOLD));
+            textList.add(Component
+                    .translatable("start_core.machine.dream_link.range", rangeComponent)
+                    .withStyle(Style.EMPTY.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+                            Component.translatable("start_core.machine.dream_link.tower.range_hover")))));
+        } else {
+            textList.add(Component
+                    .translatable("start_core.machine.dream_link.unlimited_range")
+                    .withStyle(Style.EMPTY.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+                            Component.translatable("start_core.machine.dream_link.tower.range_hover")))));
+        }
+
+        MutableComponent totalHatchesComponent = Component.literal(FormattingUtil.formatNumbers(this.recieverCount))
+            .setStyle(Style.EMPTY.withColor(ChatFormatting.LIGHT_PURPLE));
+
+        textList.add(Component
+            .translatable("start_core.machine.dream_link.total_hatches", totalHatchesComponent)
+            .withStyle(Style.EMPTY.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+                    Component.translatable("start_core.machine.dream_link.tower.total_hatches_hover")))));
+
     }
 
     @Override
@@ -333,5 +366,10 @@ public class StarTDreamLinkTransmissionMachine extends WorkableMultiblockMachine
             player.sendSystemMessage(Component.translatable("start_core.machine.dream_link.set_network"));
         }
         return InteractionResult.sidedSuccess(isRemote());
+    }
+
+    @Override
+    public boolean isDreaming() {
+        return this.inputHatches.getOutputPerSec() > 0;
     }
 }

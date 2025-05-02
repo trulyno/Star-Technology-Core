@@ -155,7 +155,13 @@ def generate_overlayed_sheets(
         filename = f"{tier}_{amps[idx]}a_energy_hatch/{output}"
         if not os.path.exists(os.path.dirname(filename)):
             os.makedirs(os.path.dirname(filename))
-        
+
+
+        if output == "overlay_front.png":
+            if (idx == 7):
+                sheet.save(f"../../item/{tier}_{amps[idx]}a_dream_link_cover_item.png")
+                shutil.copyfile("overlay_front.png.mcmeta", f"../../item/{tier}_{amps[idx]}a_dream_link_cover_item.png.mcmeta")
+
         shutil.copyfile("overlay_front_emissive.png.mcmeta", os.path.dirname(filename) + "/overlay_front_emissive.png.mcmeta")
         shutil.copyfile("overlay_front.png.mcmeta", os.path.dirname(filename) + "/overlay_front.png.mcmeta")
 

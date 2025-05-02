@@ -10,4 +10,7 @@ public interface IStarTDreamLinkNetworkMachine extends IDataStickInteractable {
 
     /* Get the network of this machine */
     public String getNetwork();
+    
+    /* Get if the machine is currently in the Dreaming (active) state */
+    public boolean isDreaming();
 }

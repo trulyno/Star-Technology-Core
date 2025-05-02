@@ -1,6 +1,7 @@
 package com.startechnology.start_core.machine.dreamlink;
 
 import java.util.List;
+import java.util.Objects;
 
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.capability.recipe.IO;
@@ -24,9 +25,11 @@ import com.lowdragmc.lowdraglib.gui.widget.WidgetGroup;
 import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
 import com.startechnology.start_core.api.capability.IStarTDreamLinkNetworkMachine;
+import com.startechnology.start_core.api.capability.IStarTDreamLinkNetworkRecieveEnergy;
 import com.startechnology.start_core.api.capability.StarTNotifiableDreamLinkContainer;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.HoverEvent;
@@ -38,7 +41,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.BlockHitResult;
 
-public class StarTDreamLinkHatchPartMachine extends TieredIOPartMachine implements IStarTDreamLinkNetworkMachine {
+public class StarTDreamLinkHatchPartMachine extends TieredIOPartMachine implements IStarTDreamLinkNetworkMachine, IStarTDreamLinkNetworkRecieveEnergy {
 
     /*
      * As far as i can understand, the Managed Field Holder allows this class
@@ -178,5 +181,34 @@ public class StarTDreamLinkHatchPartMachine extends TieredIOPartMachine implemen
             player.sendSystemMessage(Component.translatable("start_core.machine.dream_link.set_network"));
         }
         return InteractionResult.sidedSuccess(isRemote());
+    }
+
+    @Override
+    public boolean isDreaming() {
+        return this.container.getInputPerSec() > 0;
+    }
+
+    @Override
+    public long recieveEnergy(long recieved) {
+        return this.container.changeEnergy(Math.min(recieved, container.getInputVoltage() * container.getInputAmperage()));
+    }
+
+    @Override
+    public BlockPos devicePos() {
+        return this.getPos();
+    }
+
+    @Override
+    public boolean canRecieve(StarTDreamLinkTransmissionMachine tower) {
+        if (!Objects.equals(this.getNetwork(), tower.getNetwork()))
+            return false;
+
+        if (!Objects.equals(this.getHolder().getOwner().getUUID(), tower.getHolder().getOwner().getUUID()))
+            return false;
+
+        if (!Objects.equals(this.getLevel().dimensionTypeId(), tower.getLevel().dimensionTypeId()))
+            return false;
+
+        return true;
     }
 }

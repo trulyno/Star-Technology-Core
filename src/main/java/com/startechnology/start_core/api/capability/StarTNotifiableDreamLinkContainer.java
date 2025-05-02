@@ -32,7 +32,7 @@ public class StarTNotifiableDreamLinkContainer extends NotifiableEnergyContainer
         if (getMachine().getLevel().isClientSide)
             return;
 
-        StarTDreamLinkManager.addPartMachine((StarTDreamLinkHatchPartMachine)getMachine());
+        StarTDreamLinkManager.addDevice((StarTDreamLinkHatchPartMachine)getMachine());
     }
 
     @Override
@@ -42,7 +42,7 @@ public class StarTNotifiableDreamLinkContainer extends NotifiableEnergyContainer
         if (getMachine().getLevel().isClientSide)
             return;
 
-        StarTDreamLinkManager.removePartMachine((StarTDreamLinkHatchPartMachine)getMachine());
+        StarTDreamLinkManager.removeDevice((StarTDreamLinkHatchPartMachine)getMachine());
     }
 
     /* Disable input from all sides */

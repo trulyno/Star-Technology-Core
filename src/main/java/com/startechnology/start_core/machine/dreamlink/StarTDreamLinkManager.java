@@ -6,21 +6,23 @@ import com.github.davidmoten.rtree.Entry;
 import com.github.davidmoten.rtree.RTree;
 import com.github.davidmoten.rtree.geometry.Geometries;
 import com.github.davidmoten.rtree.geometry.Geometry;
+import com.startechnology.start_core.api.capability.IStarTDreamLinkNetworkRecieveEnergy;
+
 import net.minecraft.core.BlockPos;
 import rx.Observable;
 
 public class StarTDreamLinkManager {
-    private RTree<StarTDreamLinkHatchPartMachine, Geometry> DREAM_LINK_TREE = RTree.create();
-    private HashSet<StarTDreamLinkHatchPartMachine> INSERTED_SET = new HashSet<>();
+    private RTree<IStarTDreamLinkNetworkRecieveEnergy, Geometry> DREAM_LINK_TREE = RTree.create();
+    private HashSet<IStarTDreamLinkNetworkRecieveEnergy> INSERTED_SET = new HashSet<>();
 
     // Singleton for management
     private static final StarTDreamLinkManager MANAGER = new StarTDreamLinkManager();
     
     private StarTDreamLinkManager() {}
 
-    public static void addPartMachine(StarTDreamLinkHatchPartMachine machine) {
+    public static void addDevice(IStarTDreamLinkNetworkRecieveEnergy machine) {
         /* Translate position to RTree position */
-        BlockPos position = machine.getPos();
+        BlockPos position = machine.devicePos();
 
         int x = position.getX();
         int z = position.getZ();
@@ -33,9 +35,9 @@ public class StarTDreamLinkManager {
         MANAGER.DREAM_LINK_TREE = MANAGER.DREAM_LINK_TREE.add(machine, Geometries.point(x, z));
     }
 
-    public static void removePartMachine(StarTDreamLinkHatchPartMachine machine) {
+    public static void removeDevice(IStarTDreamLinkNetworkRecieveEnergy machine) {
         /* Translate position to RTree position */
-        BlockPos position = machine.getPos();
+        BlockPos position = machine.devicePos();
 
         int x = position.getX();
         int z = position.getZ();
@@ -45,7 +47,7 @@ public class StarTDreamLinkManager {
         MANAGER.DREAM_LINK_TREE = MANAGER.DREAM_LINK_TREE.delete(machine, Geometries.point(x, z));
     }
 
-    public static Observable<Entry<StarTDreamLinkHatchPartMachine, Geometry>> getPartMachines(int tx, int tz, int bx, int bz) {
+    public static Observable<Entry<IStarTDreamLinkNetworkRecieveEnergy, Geometry>> getDevices(int tx, int tz, int bx, int bz) {
         return MANAGER.DREAM_LINK_TREE.search(Geometries.rectangle(bx, bz, tx, tz));
     }
 }
