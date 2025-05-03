@@ -13,5 +13,5 @@ public interface IStarTDreamLinkNetworkRecieveEnergy {
     BlockPos devicePos();
 
     /* Whether or not this machine can recieve from this transmission tower */
-    boolean canRecieve(StarTDreamLinkTransmissionMachine tower);
+    boolean canRecieve(StarTDreamLinkTransmissionMachine tower, Boolean checkDimension);
 }

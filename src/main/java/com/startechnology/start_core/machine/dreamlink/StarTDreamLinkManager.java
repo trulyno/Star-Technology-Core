@@ -50,4 +50,8 @@ public class StarTDreamLinkManager {
     public static Observable<Entry<IStarTDreamLinkNetworkRecieveEnergy, Geometry>> getDevices(int tx, int tz, int bx, int bz) {
         return MANAGER.DREAM_LINK_TREE.search(Geometries.rectangle(bx, bz, tx, tz));
     }
+
+    public static Observable<Entry<IStarTDreamLinkNetworkRecieveEnergy, Geometry>> getAllDevices() {
+        return MANAGER.DREAM_LINK_TREE.entries();
+    }
 }

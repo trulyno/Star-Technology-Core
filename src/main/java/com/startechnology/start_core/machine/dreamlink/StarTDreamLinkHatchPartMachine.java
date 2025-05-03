@@ -199,15 +199,17 @@ public class StarTDreamLinkHatchPartMachine extends TieredIOPartMachine implemen
     }
 
     @Override
-    public boolean canRecieve(StarTDreamLinkTransmissionMachine tower) {
+    public boolean canRecieve(StarTDreamLinkTransmissionMachine tower, Boolean checkDimension) {
         if (!Objects.equals(this.getNetwork(), tower.getNetwork()))
             return false;
 
         if (!Objects.equals(this.getHolder().getOwner().getUUID(), tower.getHolder().getOwner().getUUID()))
             return false;
 
-        if (!Objects.equals(this.getLevel().dimensionTypeId(), tower.getLevel().dimensionTypeId()))
-            return false;
+        if (checkDimension) {
+            if (!Objects.equals(this.getLevel().dimensionTypeId(), tower.getLevel().dimensionTypeId()))
+                return false;
+        }
 
         return true;
     }

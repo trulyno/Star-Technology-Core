@@ -67,14 +67,16 @@ public class StarTDreamLinkTransmissionMachine extends WorkableMultiblockMachine
 
     private Integer range;
     private Integer recieverCount;
+    private Boolean checkDimension;
 
-    public StarTDreamLinkTransmissionMachine(IMachineBlockEntity holder, Integer range) {
+    public StarTDreamLinkTransmissionMachine(IMachineBlockEntity holder, Integer range, Boolean checkDimension) {
         super(holder);
         this.tickSubscription = new ConditionalSubscriptionHandler(this, this::transferEnergyTick, this::isFormed);
         this.isReadyToTransmit = false;
         this.inputHatches = new EnergyContainerList(new ArrayList<>());
         this.network = IStarTDreamLinkNetworkMachine.DEFAULT_NETWORK;
         this.range = range;
+        this.checkDimension = checkDimension;
     }
 
     @Override
@@ -154,13 +156,16 @@ public class StarTDreamLinkTransmissionMachine extends WorkableMultiblockMachine
             int x = centre.getX();
             int z = centre.getZ();
 
-            UUID thisUUID = this.getHolder().getOwner().getUUID();
-            String thisNetwork = this.getNetwork();
+            Observable<Entry<IStarTDreamLinkNetworkRecieveEnergy, Geometry>> machines;
 
             // Get dream-link hatches
-            Observable<Entry<IStarTDreamLinkNetworkRecieveEnergy, Geometry>> machines = StarTDreamLinkManager.getDevices(x + range, z + range, x - range, z - range)
-                .filter(machine -> {
-                    return machine.value().canRecieve(this);
+            if (this.range != -1)
+                machines = StarTDreamLinkManager.getDevices(x + range, z + range, x - range, z - range);
+            else
+                machines = StarTDreamLinkManager.getAllDevices();
+
+            machines = machines.filter(machine -> {
+                    return machine.value().canRecieve(this, this.checkDimension);
                 }).sorted((machinea, machineb) -> {
                     IStarTDreamLinkNetworkRecieveEnergy parta = machinea.value();
                     IStarTDreamLinkNetworkRecieveEnergy partb = machineb.value();
@@ -269,10 +274,17 @@ public class StarTDreamLinkTransmissionMachine extends WorkableMultiblockMachine
                     .withStyle(Style.EMPTY.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                             Component.translatable("start_core.machine.dream_link.tower.range_hover")))));
         } else {
-            textList.add(Component
-                    .translatable("start_core.machine.dream_link.unlimited_range")
-                    .withStyle(Style.EMPTY.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
-                            Component.translatable("start_core.machine.dream_link.tower.range_hover")))));
+            if (this.checkDimension) {
+                textList.add(Component
+                        .translatable("start_core.machine.dream_link.unlimited_range")
+                        .withStyle(Style.EMPTY.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+                                Component.translatable("start_core.machine.dream_link.tower.range_hover")))));
+            } else {
+                textList.add(Component
+                .translatable("start_core.machine.dream_link.paragon_range")
+                .withStyle(Style.EMPTY.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+                        Component.translatable("start_core.machine.dream_link.tower.range_hover")))));
+            }
         }
 
         MutableComponent totalHatchesComponent = Component.literal(FormattingUtil.formatNumbers(this.recieverCount))

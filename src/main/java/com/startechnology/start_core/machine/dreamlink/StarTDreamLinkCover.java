@@ -120,7 +120,7 @@ public class StarTDreamLinkCover extends CoverBehavior implements IStarTDreamLin
     public long recieveEnergy(long recieved) {
         IEnergyContainer container = this.getEnergyContainer();
 
-        if (container.getInputVoltage() < GTValues.V[this.tier]) {
+        if (container.getInputVoltage() < GTValues.V[this.tier] && recieved > container.getInputVoltage()) {
             var entity = coverHolder.getLevel().getBlockEntity(coverHolder.getPos());
 
             if (entity instanceof MetaMachineBlockEntity metaMachineBlockEntity) {
@@ -141,7 +141,7 @@ public class StarTDreamLinkCover extends CoverBehavior implements IStarTDreamLin
     }
 
     @Override
-    public boolean canRecieve(StarTDreamLinkTransmissionMachine tower) {
+    public boolean canRecieve(StarTDreamLinkTransmissionMachine tower, Boolean checkDimension) {
         if (!Objects.equals(this.network, tower.getNetwork()))
             return false;
 
@@ -154,8 +154,10 @@ public class StarTDreamLinkCover extends CoverBehavior implements IStarTDreamLin
             return false;
         }
 
-        if (!Objects.equals(coverHolder.getLevel().dimensionTypeId(), tower.getLevel().dimensionTypeId()))
-            return false;
+        if (checkDimension) {
+            if (!Objects.equals(coverHolder.getLevel().dimensionTypeId(), tower.getLevel().dimensionTypeId()))
+                return false;
+        }
 
         return true;
     }
@@ -171,7 +173,7 @@ public class StarTDreamLinkCover extends CoverBehavior implements IStarTDreamLin
         group.addWidget(
             new DraggableScrollableWidgetGroup(4, 4, 182, 117)
                 .addWidget(new LabelWidget(4, 5, "Dream-Link Cover"))
-                .addWidget(new LabelWidget(4, 20, "§eDream-Network Identifier"))
+                .addWidget(new LabelWidget(4, 20, "Dream-Network Identifier"))
                 .addWidget(
                     new TextFieldWidget(4, 32, 182 - 8, 12, this::getNetwork, this::setNetwork)
                         .setMaxStringLength(64)
