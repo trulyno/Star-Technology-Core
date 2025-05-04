@@ -1,3 +1,3 @@
 # Star Technology Core 
 
-This repository contains the Core Mod for Star Technology, adding new unique things to Gregtech Modern for the modpack.
+This repository has been moved to [https://github.com/StarT-Dev-Team/StarT-Core](https://github.com/StarT-Dev-Team/StarT-Core).
